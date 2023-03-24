@@ -8,8 +8,8 @@ session_start();
 
 if (isset($_SESSION['user_name'])) 
 {
-    //header("Location: dashboard.php");
-      echo"hello customer";
+    header("Location: dashboard.php");
+      //echo"hello customer";
 
 }
 
@@ -66,7 +66,8 @@ if (isset($_POST['submit']))
                             if($result)
                             {
 
-                                echo"hello world";
+                                header("Location: dashboard.php");
+                                // echo"hello world";
                             }
                             else 
                             {

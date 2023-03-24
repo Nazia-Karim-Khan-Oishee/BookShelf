@@ -142,9 +142,7 @@ if (isset($_POST['submit']))
                 <button class="form__button" type="submit" id="submitBtn" name="submit" value="Login"
                     requied>Continue</button>
             </form>
-            <p class="form__text">
-                <a href="recover_psw.php" class="form__link">Forgot your password</a>
-            </p>
+
             <p class="form__text">Don't have an account?
                 <a href="SignUp.php">Create account</a>
             </p>
