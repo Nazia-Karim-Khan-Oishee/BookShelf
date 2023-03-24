@@ -59,7 +59,7 @@ create table `customer_book`(
     constraint `customer_book_pk` primary key (`email`, `ISBN`, `copy_id`),
     constraint `fk_customer_book1` foreign key (`email`) references `users` (`email`),
     constraint `fk_customer_book2` foreign key (`ISBN`) references `book` (`ISBN`),
-    constraint `fk_customer_book3` foreign key (`copy_id`) references `book`(`copy_id`)
+    constraint `fk_customer_book3` foreign key (`copy_id`) references `all_copies_of_book`(`copy_id`)
 );
 create table `book_location_retrieval`(
     `retrieval_id` varchar(255) not null,
@@ -69,7 +69,7 @@ create table `book_location_retrieval`(
     `retrieval_date` datetime not null,
     constraint `book_location_retrieval_pk` primary key (`retrieval_id`),
     constraint `fk_book_location_retrieval1` foreign key (`ISBN`) references `book`(`ISBN`),
-    constraint `fk_book_location_retrieval2` foreign key (`copy_id`) references `book`(`copy_id`),
+    constraint `fk_book_location_retrieval2` foreign key (`copy_id`) references `all_copies_of_book`(`copy_id`),
     constraint `fk_book_location_retrieval3` foreign key (`location_id`) references `location`(`location_id`),
     constraint `fk_book_location_retrieval4` foreign key (`retrieval_date`) references `customer_book`(`return_date`) 
 );
@@ -81,7 +81,7 @@ create table `book_location_delivery`(
     `delivery_date` datetime not null,
     constraint `book_location_delivery_pk` primary key (`delivery_id`),
     constraint `fk_book_location_delivery1` foreign key (`ISBN`) references `book`(`ISBN`),
-    constraint `fk_book_location_delivery2` foreign key (`copy_id`) references `book`(`copy_id`),
+    constraint `fk_book_location_delivery2` foreign key (`copy_id`) references `all_copies_of_book`(`copy_id`),
     constraint `fk_book_location_delivery3` foreign key (`location_id`) references `location`(`location_id`),
     constraint `fk_book_location_delivery4` foreign key (`delivery_date`) references `customer_book`(`issue_date`) 
 );
