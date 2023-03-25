@@ -44,9 +44,9 @@ alter table `location` add primary key (`location_id`);
 create table `all_copies_of_book`(
     `ISBN` varchar(13) not null,
     `copy_id` varchar(10) not null,
-    constraint `pk_all_copies_of_book` primary key (`ISBN`, `copy_id`),
     constraint `all_copies_of_book_fk` foreign key (`ISBN`) references `book` (`ISBN`)
 )engine=InnoDB default charset=utf8mb4 collate=utf8mb4_unicode_ci;
+alter table `all_copies_of_book` add primary key (`ISBN`, `copy_id`);
 create table `customer_book`(
     `email` varchar(255) not null,
     `ISBN` varchar(13) not null,
