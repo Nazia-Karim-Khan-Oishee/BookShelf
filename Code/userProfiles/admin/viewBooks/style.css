@@ -1,0 +1,17 @@
+th {
+    text-align: center;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  .search-class{
+    color: white !important;
+  }
+.form-control{
+    background-color:#6c757d !important;
+    color: white !important;
+}
+.btn-dark {
+    height : fit-content !important;
+  }
