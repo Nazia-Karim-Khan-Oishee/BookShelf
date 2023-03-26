@@ -2,7 +2,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$database = "BookShelf";
+$database = "bookshelf";
 
 $Conn = mysqli_connect($server, $user, $pass, $database);
 // $i=0;

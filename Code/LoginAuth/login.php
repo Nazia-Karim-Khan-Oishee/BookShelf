@@ -8,7 +8,7 @@ session_start();
 
 if (isset($_SESSION['email'])) 
 {
-     header("Location: dashboard.php");
+    //  header("Location: dashboard.php");
     //  echo"hello world";
 
 }
@@ -29,12 +29,34 @@ if (isset($_POST['submit']))
             {
     
                 $_SESSION['email'] = $row['email'];
-                $_POST['password'] = "";
-                $_POST['email'] = "";
-                //unset($user_name);
-                header("Location: dashboard.php");
-                // echo"hello ". $row['email'];
+                $_SESSION['role'] = $row['role'];
+                if( $_SESSION['role']==="Reader")
+                {
+                    $sql_customer = "SELECT * FROM customer WHERE email='$email'";// AND password='$password'";
+	                $result_customer = mysqli_query($Conn, $sql_customer);
+                    $res = mysqli_fetch_assoc($result_customer);
+                    $_SESSION['user_name'] = $res['name'];
 
+                    $_POST['password'] = "";
+                    $_POST['email'] = "";
+                    //unset($user_name);
+                    header("Location: ../userProfiles/customer/dashboard.php");
+                    // echo"hello ". $row['email'];
+
+                }
+             else
+                {
+                     $sql_deliveryman = "SELECT * FROM deliveryman WHERE email='$email'";// AND password='$password'";
+	                $result_deliveryman = mysqli_query($Conn, $sql_deliveryman);
+                    $res = mysqli_fetch_assoc($result_deliveryman);
+                    $_SESSION['user_name'] = $res['name'];
+                    $_POST['password'] = "";
+                    $_POST['email'] = "";
+                    //unset($user_name);
+                    header("Location: ../userProfiles/delivery/dashboard.php");
+                    // echo"hello ". $row['email'];
+
+                }
     
             }
             else 
@@ -61,6 +83,10 @@ if (isset($_POST['submit']))
 <html lang="en">
 
 <head>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="style.css" rel="stylesheet" />
+
     <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
@@ -75,25 +101,17 @@ if (isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link rel="stylesheet" href="LogIn.css">
+    <link rel="stylesheet" href="login.css">
     <link href="http://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Log In</title>
 </head>
 
 <body>
-    <div class="navbar">
-        <nav>
+    <?php
+  require 'navbar.php';
+  Navbar();
+  ?>
 
-            <ul>
-                <li>
-                    <div class="zoom"><a href="SignUp.php">HOME</a></div>
-                </li>
-
-                <!--<li><div class="zoom"><a href="dashboard.php">DASHBOARD</a></div></li> -->
-            </ul>
-
-        </nav>
-    </div>
 
     <div class="container1">
 
@@ -144,57 +162,12 @@ if (isset($_POST['submit']))
             </form>
 
             <p class="form__text">Don't have an account?
-                <a href="SignUp.php">Create account</a>
+                <a href="signup.php">Create account</a>
             </p>
             </form>
         </div>
     </div>
-    <footer>
-        <div class="row">
-            <div class="col">
-                <h3>AGROWCULTURE</h3>
-                <p>AgrowCulture is a platform created to expand the exposure of the people working in the agricultural
-                    sector. On a single platform, AgrowCulture connects these people with funders and customers by
-                    eliminating intermediaries. It also enables Bangladesh agriculture financing. Anyone can connect
-                    through AgrowCulture to help finance our farmers.</p>
-            </div>
-            <div class="col">
-                <h5>Address <div class="underline"><span></span></div>
-                </h5>
-                <p>Islamic University of Technology</p>
-                <p>Boardbazar, Gazipur</p>
-            </div>
-            <div class="col">
-                <h5>Links <div class="underline"><span></span></div>
-                </h5>
-                <ul>
-                    <li><a href="getstartedpage.php">HOME</a></li>
-                    <li><a href="4optionss.php">SERVICES</a></li>
-                    <li><a href="aboutus.php">ABOUT US</a></li>
-                    <li><a href="aboutus.php">CONTACTS</a></li>
-                </ul>
-            </div>
 
-            <ul class="social_icon">
-                <li><a href="#">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a></li>
-                <li><a href="#">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a></li>
-                <li><a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a></li>
-                <li><a href="#">
-                        <ion-icon name="logo-linkedin"></ion-icon>
-                    </a></li>
-            </ul>
-        </div>
-        <hr>
-        <p class="copyright">2022 Copyright © AgrowCulture. | Legal | Privacy Policy | Design by Namiha</p>
-
-        </div>
-    </footer>
 </body>
 
 </html>
