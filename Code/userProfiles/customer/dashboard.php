@@ -32,7 +32,7 @@ $user_name =  $_SESSION['user_name'];
 </head>
 
 <body>
-    <p>hello</<p>
+    <p>hello ............</<p>
 
         <?php echo $_SESSION['user_name']; ?>
         <a href="../../LoginAuth/logout.php">Logout</a>

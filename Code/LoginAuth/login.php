@@ -8,6 +8,13 @@ session_start();
 
 if (isset($_SESSION['email'])) 
 {
+    if( $_SESSION['role']==="Reader")
+    {
+      header("Location: ../userProfiles/customer/dashboard.php");
+      }
+    else {
+  header("Location: ../userProfiles/delivery/dashboard.php");
+}  
     //  header("Location: dashboard.php");
     //  echo"hello world";
 
@@ -34,8 +41,9 @@ if (isset($_POST['submit']))
                 {
                     $sql_customer = "SELECT * FROM customer WHERE email='$email'";// AND password='$password'";
 	                $result_customer = mysqli_query($Conn, $sql_customer);
-                    $res = mysqli_fetch_assoc($result_customer);
-                    $_SESSION['user_name'] = $res['name'];
+                    $res_customer = mysqli_fetch_assoc($result_customer);
+                    $_SESSION['user_name'] = $res_customer['name'];
+                   // echo $_SESSION['user_name'];
 
                     $_POST['password'] = "";
                     $_POST['email'] = "";
@@ -50,6 +58,7 @@ if (isset($_POST['submit']))
 	                $result_deliveryman = mysqli_query($Conn, $sql_deliveryman);
                     $res = mysqli_fetch_assoc($result_deliveryman);
                     $_SESSION['user_name'] = $res['name'];
+                    echo $_SESSION['user_name'];
                     $_POST['password'] = "";
                     $_POST['email'] = "";
                     //unset($user_name);
@@ -63,7 +72,7 @@ if (isset($_POST['submit']))
             {
                 $WrongPass="Wrong Password.";
                 $_POST['password'] = "";
-                $_POST['user_name'] = "";
+                $_POST['email'] = "";
                 unset($user_name);
             }
        
