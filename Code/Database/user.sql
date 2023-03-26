@@ -29,7 +29,8 @@ create table `book`(
     `name` varchar(255) not null,
     `author` varchar(255) not null,
     `edition` varchar(3) not null,
-    `publisher` varchar(255) not NULL
+    `publisher` varchar(255) not NULL,
+    -- `book_picture` longblob DEFAULT NULL
 )engine=InnoDB default charset=utf8mb4 collate=utf8mb4_unicode_ci;
 alter table `book` add primary key (`ISBN`);
 create table `location`(
