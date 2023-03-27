@@ -1,3 +1,12 @@
+<?php 
+include '../../../Database/Config.php';
+
+// Query to fetch all books from the book table
+$sql = "SELECT * FROM book";
+
+// Execute the query
+$result = mysqli_query($Conn, $sql);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -21,13 +30,20 @@
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-                        <h3>Featured Product</h3>
-                        <h2>Popular Products</h2>
+                        <h3>Book Catalogue</h3>
+                        <h2>Available Books</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <!-- Single Product -->
+                <?php
+          // Check if there are any records
+          if (mysqli_num_rows($result) > 0) {
+            
+            while($row = mysqli_fetch_assoc($result)) {
+                ?>
+
                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                     <div id="product-1" class="single-product">
                         <div class="part-1">
@@ -37,128 +53,22 @@
                             </ul>
                         </div>
                         <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
+                            <h3 class="product-title"><?php echo $row["name"] ?></h3>
+                            <h4 class="product"><?php echo $row["author"] ?></h4><br>
                         </div>
                     </div>
                 </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-1" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-2" class="single-product">
-                        <div class="part-1">
-                            
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-3" class="single-product">
-                        <div class="part-1">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Product -->
-                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-4" class="single-product">
-                        <div class="part-1">
-                            <span class="new">new</span>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="part-2">
-                            <h3 class="product-title">naam</h3>
-                            <h4 class="product">author</h4><br>
-                            <h4 class="product-price">publication</h4>
-                        </div>
-                    </div>
-                </div>
+                <?php } 
+
+            }
+           else {
+            echo "<p>No books found</p>";
+          }
+
+          // Close the database connection
+          mysqli_close($Conn);
+          ?>
+                
             </div>
         </div>
     </section>
