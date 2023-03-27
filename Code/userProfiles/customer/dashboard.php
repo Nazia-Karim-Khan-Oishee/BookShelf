@@ -1,11 +1,11 @@
 <?php 
 
-include '../Database/Config.php';
+include '../../Database/Config.php';
+
 error_reporting(0);
 
 session_start();
-
-$email = $_SESSION['email'];
+$user_name =  $_SESSION['user_name'];
 
 ?>
 <!DOCTYPE html>
@@ -32,10 +32,10 @@ $email = $_SESSION['email'];
 </head>
 
 <body>
-    <p>hello</<p>
+    <p>hello ............</<p>
 
-    </p><?php echo $_SESSION['email']; ?>
-    <a href="logout.php">Logout</a>
+        <?php echo $_SESSION['user_name']; ?>
+        <a href="../../LoginAuth/logout.php">Logout</a>
 
 </body>
 

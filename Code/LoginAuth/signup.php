@@ -6,19 +6,33 @@ error_reporting(0);
 
 session_start();
 
-if (isset($_SESSION['user_name'])) 
+if (isset($_SESSION['email'])) 
 {
-    header("Location: dashboard.php");
-      //echo"hello customer";
+    if( $_SESSION['role']==="Reader")
+                {
+                    
+                    header("Location: ../userProfiles/customer/dashboard.php");
+                }
+else {
+                    header("Location: ../userProfiles/delivery/dashboard.php");
+
+}
+      //   echo "hello customer";
 
 }
 
 if (isset($_POST['submit'])) 
 {
+    
     $email = $_POST["email"];
+    $contact_no = $_POST["contact_no"];
 	$Just_Set = false;
     $Validate = true;
-	
+    $role = $_POST['Field'];
+    $user_name = $_POST['user_name'];
+	 $_SESSION['email'] = $email;
+      $_SESSION['role'] = $role;
+        $_SESSION['user_name'] = $user_name;
 	$checkpassword = ($_POST['password']);
     $password = md5($_POST['password']);
     $cpassword = md5($_POST['cpassword']);
@@ -33,83 +47,184 @@ if (isset($_POST['submit']))
     }
     
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    if($Validate)
-	{        
-
-        if ($password === $cpassword) 
+        if(strlen($contact_no)==11)
         {
-            
-            
+               if($Validate)
+            {        
+                if ($password === $cpassword) 
+                {
+                    
+                    
                     $check_query = mysqli_query($Conn, "SELECT * FROM users where email ='$email'");
                     $rowCount = mysqli_num_rows($check_query);
                     if($rowCount > 0)
                     {
                         $emailErr = "User with email already exists!";
-                       
+                        unset($email);
+                    unset($password);
+                    unset($cpassword);
+                    unset($user_name);
+                     unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                     $_POST['user_name'] = "";
+                    $_POST['email'] = "";
+                    $_POST['password'] = "";
+                    $_POST['cpassword'] = ""; 
+                }
                 
-                unset($email);
+                else
+                {
+                    $password=password_hash($password,PASSWORD_BCRYPT);
+                    if($role ==="Reader")
+                    {
+                               
+                              $sql = "INSERT INTO users (email, password, role) 
+                                         VALUES ('$email', '$password', '$role')";
+    
+                                $result = mysqli_query($Conn, $sql);
+                                $sql_customer = "INSERT INTO customer (email, name, contact_no, fine_amount) 
+                                         VALUES ('$email', '$user_name', '$contact_no', 0)";
+                                         $result2 = mysqli_query($Conn, $sql_customer);
+    
+                                if($result && $result2 )
+                                {
+    
+                                     header("Location: ../userProfiles/customer/dashboard.php");
+                                      unset($email);
+                                    unset($password);
+                                    unset($cpassword);
+                                    unset($user_name);
+                                     unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                                    $_POST['email'] = "";
+                                    $_POST['password'] = "";
+                                    $_POST['cpassword'] = "";
+                                    $_POST['user_name'] = "";
+                                 
+                                }
+                                else 
+                                {
+                                     echo"something went wrong";
+                                      unset($email);
+                                    unset($password);
+                                    unset($cpassword);
+                                    unset($user_name);
+                                     unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                                    $_POST['email'] = "";
+                                    $_POST['password'] = "";
+                                    $_POST['cpassword'] = "";
+                                    $_POST['user_name'] = "";
+    
+                                }
+                              }
+                              else {
+                                
+                              $sql = "INSERT INTO users (email, password, role) 
+                                         VALUES ('$email', '$password', '$role')";
+    
+                                $result = mysqli_query($Conn, $sql);
+                                $sql_deliveryman = "INSERT INTO deliveryman (email, name, contact_no) 
+                                         VALUES ('$email', '$user_name', '$contact_no')";
+                                         $result2 = mysqli_query($Conn, $sql_deliveryman);
+    
+                                if($result && $result2 )
+                                {
+    
+                                     header("Location: ../userProfiles/delivery/dashboard.php");
+                                      unset($email);
+                                    unset($password);
+                                    unset($cpassword);
+                                    unset($user_name);
+                                     unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                                    $_POST['email'] = "";
+                                    $_POST['password'] = "";
+                                    $_POST['cpassword'] = "";
+                                    $_POST['user_name'] = "";
+                                 
+                                }
+                                else 
+                                {
+                                     echo"something went wrong";
+                                      unset($email);
+                                    unset($password);
+                                    unset($cpassword);
+                                    unset($user_name);
+                                     unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                                    $_POST['email'] = "";
+                                    $_POST['password'] = "";
+                                    $_POST['cpassword'] = "";
+                                    $_POST['user_name'] = "";
+    
+                                }
+                              }
+                             
+                        }
+                    }
+                                else 
+                                {
+                                    $ConfirmErr="Password doesn't match";
+                                   
+                                    unset($email);
+                                    unset($password);
+                                    unset($cpassword);
+                                    unset($user_name);
+                                    unset($contact_no);
+                                   $_POST['contact_no'] = "";
+                                    $_POST['email'] = "";
+                                    $_POST['password'] = "";
+                                    $_POST['cpassword'] = "";
+                                    $_POST['user_name'] = "";
+    
+                                }
+                             
+        }
+        else 
+        {   
+            $PassErr="Password should contain at least one uppercase letter, one lowercase letter, one special character and one number";
+            unset($email);
                 unset($password);
                 unset($cpassword);
-                        $_POST['Name'] = "";
-               
+                unset($user_name);   
+                unset($contact_no);
+                $_POST['contact_no'] = "";
                 $_POST['email'] = "";
                 $_POST['password'] = "";
-                $_POST['cpassword'] = ""; 
-                     }
-
-                    else
-                    {
-                          $password=password_hash($password,PASSWORD_BCRYPT);
-                         $sql = "INSERT INTO users (email, password)
-                                     VALUES ('$email', '$password')";
-                            $result = mysqli_query($Conn, $sql);
-                            if($result)
-                            {
-
-                                header("Location: dashboard.php");
-                                // echo"hello world";
-                            }
-                            else 
-                            {
-                                 echo"something went wrong";
-
-                            }
-                    }
-                }
-                            else 
-                            {
-                                $ConfirmErr="Password doesn't match";
-                               
-                                unset($email);
+                $_POST['cpassword'] = "";
+                $_POST['user_name'] = "";
+        }
+        }
+        else {
+                       $contactErr="IContact no must be 11 digits long";
+                           
+                                     unset($email);
                                 unset($password);
                                 unset($cpassword);
+                                unset($user_name);
+                                unset($contact_no);
+                                $_POST['contact_no'] = "";
                                 $_POST['email'] = "";
                                 $_POST['password'] = "";
                                 $_POST['cpassword'] = "";
-                            }
-                         
-    }
-                        else 
-                        {   
-                            $PassErr="Password should contain at least one uppercase letter, one lowercase letter, one special character and one number";
-                            unset($email);
-                                unset($password);
-                                unset($cpassword);
-                                $_POST['email'] = "";
-                                $_POST['password'] = "";
-                                $_POST['cpassword'] = "";
-                        }
+                                $_POST['user_name'] = "";
+        }
     }
                     else 
                     {
                           $emailErr="Invalid Email";
                            
-                                    unset($email);
+                                     unset($email);
                                 unset($password);
                                 unset($cpassword);
+                                unset($user_name);
+                                 unset($contact_no);
+                                $_POST['contact_no'] = "";
                                 $_POST['email'] = "";
                                 $_POST['password'] = "";
                                 $_POST['cpassword'] = "";
+                                $_POST['user_name'] = "";
                         }
                     }
 
@@ -123,39 +238,48 @@ if (isset($_POST['submit']))
 <html lang="en">
 
 <head>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="style.css" rel="stylesheet" />
+
     <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
     </script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="SignUp.css">
+
+
+    <link rel="stylesheet" href="login.css">
     <link href="http://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <title>Create Account</title>
+    <title>Sign Up</title>
 </head>
 
 <body>
-    <div class="navbar">
-        <nav>
+    <?php
+  require 'navbar.php';
+  Navbar();
+  ?>
 
-            <ul>
-                <li>
-                    <div class="zoom"><a href="SignUp.php">HOME</a></div>
-                </li>
 
-                <!--<li><div class="zoom"><a href="dashboard.php">DASHBOARD</a></div></li> -->
-            </ul>
-
-        </nav>
-    </div>
     <div class="container1">
         <div class="container">
             <form class="form" action="" method="POST" id="createAccount">
                 <h1 class="form__title">Create Account</h1>
 
-
+                <h5 class="form__title">Choose a role</h5>
+                <h6 class="form__title">
+                    <input type="radio" name="Field" value="Reader" required /> Reader
+                    <br>
+                    <input type="radio" name="Field" value="DeliveryMan" required /> Delivery Man<br>
+                </h6>
 
                 <!-- Email -->
                 <div class="form__input-group">
@@ -168,20 +292,40 @@ if (isset($_POST['submit']))
                     <div class="form__input-error-message"></div>
                     <div class="form__input-error-message"></div>
                 </div>
-                <!-- Password -->
-                <div class="tooltip">
-                    <div class="form__input-group">
-                        <input type="password" class="form__input" name="password" id="myInput" autofocus
-                            placeholder="Password" autocomplete="off" value="<?php echo $_POST['password']; ?>"
-                            required>
-                        <input type="checkbox" onclick="myFunction()"><span class="error2">Show Password</span><br>
-                        <span class="tooltiptext">Password should contain at least one uppercase letter, one lowercase
-                            letter, one special character and one number</span>
-                    </div>
-                    <span class="error"> <?php echo $PassErr;?></span>
+                <div class="form__input-group">
+                    <!-- <div class="tooltip"> -->
+                    <input type="text" class="form__input" name="contact_no" autofocus placeholder="contact no"
+                        autocomplete="off" value="<?php echo $contact_no; ?>" required>
+                    <!-- <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+                    <span class="error"> <?php echo $contactErr;?></span>
                     <div class="form__input-error-message"></div>
                     <div class="form__input-error-message"></div>
                 </div>
+                <!-- user_name -->
+                <div class="form__input-group">
+                    <!-- <div class="tooltip"> -->
+                    <input type="text" class="form__input" name="user_name" autofocus placeholder="user name"
+                        autocomplete="off" value="<?php echo $user_name; ?>" required>
+                    <!-- <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+                    <!-- <span class="error"> php echo $user_error;?></span> -->
+                    <div class="form__input-error-message"></div>
+                    <div class="form__input-error-message"></div>
+                </div>
+                <!-- Password -->
+                <!-- <div class="tooltip"> -->
+                <div class="form__input-group">
+                    <input type="password" class="form__input" name="password" id="myInput" autofocus
+                        placeholder="Password" autocomplete="off" value="<?php echo $_POST['password']; ?>" required>
+                    <input type="checkbox" onclick="myFunction()"><span class="error2">Show Password</span><br>
+                    <!-- <span class="tooltiptext">Password should contain one uppercase letter,lowercase
+                            letter, special character and number</span> -->
+                    <!-- </div> -->
+                </div>
+                <span class="error"> <?php echo $PassErr;?></span>
+                <div class="form__input-error-message"></div>
+                <div class="form__input-error-message"></div>
                 <!-- Confirm Password -->
                 <div class="form__input-group">
                     <!-- <div class="tooltip"> -->
@@ -195,6 +339,7 @@ if (isset($_POST['submit']))
                 <span class="error"> <?php echo $ConfirmErr;?></span>
                 <div class="form__input-error-message"></div>
                 <div class="form__input-error-message"></div>
+
                 <script>
                 function myFunction() {
                     var x = document.getElementById("myInput");
@@ -226,7 +371,7 @@ if (isset($_POST['submit']))
         <br>
     </div>
 
-    <footer>
+    <!-- <footer>
         <div class="row">
             <div class="col">
                 <h3>AGROWCULTURE</h3>
@@ -271,7 +416,7 @@ if (isset($_POST['submit']))
             <hr>
             <p class="copyright">2022 Copyright © AgrowCulture. | Legal | Privacy Policy | Design by Namiha</p>
         </div>
-    </footer>
+    </footer>-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
