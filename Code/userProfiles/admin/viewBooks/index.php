@@ -65,13 +65,24 @@ $result = mysqli_query($Conn, $sql);
           if (mysqli_num_rows($result) > 0) {
             // Loop through each record
             while($row = mysqli_fetch_assoc($result)) {
-              // Display the record in the table row
+                $isbn = $row['ISBN'];
+                $number_of_books_query = "SELECT count(*) as count FROM all_copies_of_books WHERE ISBN = $isbn";
+                $number_of_books_result = mysqli_query($Conn, $number_of_books_query);
+                $number_of_books_row = mysqli_fetch_assoc($number_of_books_result);
+                $number_of_books = $number_of_books_row['count'];
               echo "<tr>";
               echo "<td>".$row["name"]."</td>";
               echo "<td>".$row["edition"]."</td>";
               echo "<td>".$row["author"]."</td>";
               echo "<td>".$row["publisher"]."</td>";
-              echo "<td>". 
+
+              echo "<td>". $number_of_books
+              // $sqll = 'SELECT count(*) as quantity FROM all_copies_of_books where all_copies_of_books.ISBN = $row['ISBN']';
+              // $result2 = mysqli_query($Conn, $sqll);
+              // $row2 = mysqli_fetch_assoc($result2);
+              // echo ( $row2);
+              .
+
                 "</td>";
                 echo "<td>";
                 echo "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#addQuantityModal'>+</button>";
