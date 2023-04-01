@@ -257,7 +257,7 @@ if (isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="signup.css">
     <link href="http://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Sign Up</title>
 </head>
@@ -277,7 +277,6 @@ if (isset($_POST['submit']))
                 <h5 class="form__title">Choose a role</h5>
                 <h6 class="form__title">
                     <input type="radio" name="Field" value="Reader" required /> Reader
-                    <br>
                     <input type="radio" name="Field" value="DeliveryMan" required /> Delivery Man<br>
                 </h6>
 
