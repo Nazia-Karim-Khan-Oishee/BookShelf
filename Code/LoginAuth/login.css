@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container1 {
@@ -18,11 +18,11 @@
   box-sizing: border-box;
 }
 .container {
-  width: 400px;
+  width: 30%;
   margin: auto;
   padding: 2em;
   border-radius: 25px;
-  box-shadow: 5px 5px 10px black;
+  box-shadow: 2px 2px 5px rgb(91, 91, 91);
   background-color: rgba(6, 6, 6, 0.1);
   /* background: linear-gradient(to right, #000000, #14522f); */
 }
@@ -30,7 +30,7 @@
 .container,
 .form__input,
 .form__button {
-  font: 500 1rem "Quick sand", sans-serif;
+  font: 500 1rem "Poppins", sans-serif;
 }
 
 .form--hidden {
@@ -112,7 +112,7 @@
 
 .form__button:hover,
 input:hover {
-  box-shadow: 2px 5px 5px lightgoldenrodyellow;
+  box-shadow: 2px 2px 3px rgb(181, 181, 181);
 }
 
 .form__button:active {
@@ -137,21 +137,6 @@ input:hover {
   text-decoration: underline;
 }
 
-footer {
-  position: relative;
-  width: 93.4%;
-  height: 35%;
-  background: linear-gradient(to right, #2a2b2a, #9cebb3);
-  min-height: 0px;
-
-  font-size: 16px;
-  line-height: 20px;
-  padding: 20px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 .row {
   width: 85%;
   margin: auto;
@@ -250,6 +235,9 @@ hr {
   }
 }
 a:visited {
+  color: rgb(25, 25, 25);
+}
+a:hover{
   color: blue;
 }
 
