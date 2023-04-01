@@ -130,10 +130,10 @@ CREATE TABLE `admin` (
 -- Table structure for table `all_copies_of_book`
 --
 
-CREATE TABLE `all_copies_of_book` (
-  `ISBN` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `copy_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `all_copies_of_books` (
+  `copy_id` int(11) NOT NULL,
+  `ISBN` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -198,9 +198,9 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`email`, `name`, `contact_no`, `fine_amount`, `effective_date`, `status`) VALUES
-('naziakarim@iut-dhaka.edu', 'nazia', '', '0', '0000-00-00 00:00:00', 0),
-('oishee1401@gmail.com', 'nazia', '', '0', '0000-00-00 00:00:00', 0);
+-- INSERT INTO `customer` (`email`, `name`, `contact_no`, `fine_amount`, `effective_date`, `status`) VALUES
+-- ('naziakarim@iut-dhaka.edu', 'nazia', '', '0', '0000-00-00 00:00:00', 0),
+-- ('oishee1401@gmail.com', 'nazia', '', '0', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -235,8 +235,8 @@ CREATE TABLE `deliveryman` (
 -- Dumping data for table `deliveryman`
 --
 
-INSERT INTO `deliveryman` (`email`, `name`, `contact_no`, `area`, `district`, `division`) VALUES
-('nanana@gmail.com', 'nnn', NULL, '', '', '');
+-- INSERT INTO `deliveryman` (`email`, `name`, `contact_no`, `area`, `district`, `division`) VALUES
+-- ('nanana@gmail.com', 'nnn', NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -269,10 +269,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `password`, `role`) VALUES
-('nanana@gmail.com', '$2y$10$4Ufee5z2dIao2MokqxlF4Opo7eNINrvzBzkdqS6nS4KFe8Dqg8IOu', 'DeliveryMan'),
-('naziakarim@iut-dhaka.edu', '$2y$10$d0WeuLsj1zCPwxexfBFWB.QMPVyzf9Ip6xVTOytBwfvXUNrlCq/3y', 'Reader'),
-('oishee1401@gmail.com', '$2y$10$tAtg7DSoMELB.dstWgLJdO3GfCgjhkC9l2X3sApbium9mahWcqRte', 'Reader');
+-- INSERT INTO `users` (`email`, `password`, `role`) VALUES
+-- ('nanana@gmail.com', '$2y$10$4Ufee5z2dIao2MokqxlF4Opo7eNINrvzBzkdqS6nS4KFe8Dqg8IOu', 'DeliveryMan'),
+-- ('naziakarim@iut-dhaka.edu', '$2y$10$d0WeuLsj1zCPwxexfBFWB.QMPVyzf9Ip6xVTOytBwfvXUNrlCq/3y', 'Reader'),
+-- ('oishee1401@gmail.com', '$2y$10$tAtg7DSoMELB.dstWgLJdO3GfCgjhkC9l2X3sApbium9mahWcqRte', 'Reader');
 
 --
 -- Indexes for dumped tables
@@ -287,8 +287,8 @@ ALTER TABLE `admin`
 --
 -- Indexes for table `all_copies_of_book`
 --
-ALTER TABLE `all_copies_of_book`
-  ADD PRIMARY KEY (`ISBN`,`copy_id`);
+ALTER TABLE `all_copies_of_books`
+  ADD PRIMARY KEY (`copy_id`);
 
 --
 -- Indexes for table `book`
@@ -360,8 +360,8 @@ ALTER TABLE `admin`
 --
 -- Constraints for table `all_copies_of_book`
 --
-ALTER TABLE `all_copies_of_book`
-  ADD CONSTRAINT `all_copies_of_book_fk` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`);
+-- ALTER TABLE `all_copies_of_book`
+--   ADD CONSTRAINT `all_copies_of_book_fk` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`);
 
 --
 -- Constraints for table `book_location_delivery`
@@ -397,6 +397,9 @@ ALTER TABLE `customer_book`
 --
 ALTER TABLE `deliveryman`
   ADD CONSTRAINT `deliveryMan_fk` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+ALTER TABLE `all_copies_of_books`
+  MODIFY `copy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
