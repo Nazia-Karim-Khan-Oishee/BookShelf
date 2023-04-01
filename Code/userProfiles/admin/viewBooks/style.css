@@ -4,6 +4,9 @@ body {
     font-family: "Poppins", sans-serif;
     color: #444444;
 }
+.mt-4{
+  margin-top: 6rem !important;
+}
 th {
     text-align: center;
   }
@@ -15,9 +18,19 @@ th {
     color: white !important;
   }
 .form-control{
-    background-color:#6c757d !important;
-    color: white !important;
+    background-color:#b8bfc5 !important;
+    color: black !important;
 }
 .btn-dark {
     height : fit-content !important;
   }
+/* Customize modal */
+.modal-dialog {
+  max-width: 400px;
+}
+
+.modal-body {
+  max-height: 300px;
+  overflow-y: auto;
+}
+

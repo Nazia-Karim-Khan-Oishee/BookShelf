@@ -1,10 +1,11 @@
 <?php
     
     require 'script.php';
+    require 'style.php';
     
     function navbarCustomer(){
         ?>
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">BookShelf</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -28,7 +29,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -36,12 +37,13 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
     }
 
     function navbarAdmin(){
       ?>
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">BookShelf</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -65,7 +67,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -73,12 +75,13 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
   }
 
   function navbarDelivery(){
     ?>
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">BookShelf</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -93,7 +96,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -101,6 +104,23 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
+<?php
+}
+    function navbarLanding(){
+      ?>
+<nav class="navbar fixed-top navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">BookShelf</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
 }
 ?>
