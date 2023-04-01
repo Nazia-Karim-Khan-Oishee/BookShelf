@@ -8,13 +8,19 @@ session_start();
 
 if (isset($_SESSION['email'])) 
 {
+    if($_SESSION['email']==="admin@gmail.com")
+    {
+    header("Location: ../userProfiles/admin/viewBooks/index.php");
+
+    }
     if( $_SESSION['role']==="Reader")
     {
-      header("Location: ../userProfiles/customer/dashboard.php");
+      header("Location: ../userProfiles/customer/browseBooks/index.php");
       }
-    else {
-  header("Location: ../userProfiles/delivery/dashboard.php");
-}  
+    else 
+    {
+      header("Location: ../userProfiles/delivery/index.php");
+    }  
     //  header("Location: dashboard.php");
     //  echo"hello world";
 
@@ -23,68 +29,77 @@ if (isset($_SESSION['email']))
 if (isset($_POST['submit'])) 
 {
 	$email = $_POST['email'];
-	$password = md5($_POST['password']);
-	//$cpassword = md5($_POST['cpassword']);
-	$sql = "SELECT * FROM users WHERE email='$email'";// AND password='$password'";
-	$result = mysqli_query($Conn, $sql);
-	if ($result->num_rows > 0) 
+            $password = ($_POST['password']);
+    if($email === 'admin@gmail.com' && $password === 'admin')
     {
-        $row = mysqli_fetch_assoc($result);
+        header("Location: ../userProfiles/admin/viewBooks/index.php");
         
-             
-            if(password_verify($password,$row['password']))
-            {
-    
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['role'] = $row['role'];
-                if( $_SESSION['role']==="Reader")
+    }
+    else {
+        
+        $password = md5($_POST['password']);
+        //$cpassword = md5($_POST['cpassword']);
+        $sql = "SELECT * FROM users WHERE email='$email'";// AND password='$password'";
+        $result = mysqli_query($Conn, $sql);
+        if ($result->num_rows > 0) 
+        {
+            $row = mysqli_fetch_assoc($result);
+            
+                 
+                if(password_verify($password,$row['password']))
                 {
-                    $sql_customer = "SELECT * FROM customer WHERE email='$email'";// AND password='$password'";
-	                $result_customer = mysqli_query($Conn, $sql_customer);
-                    $res_customer = mysqli_fetch_assoc($result_customer);
-                    $_SESSION['user_name'] = $res_customer['name'];
-                   // echo $_SESSION['user_name'];
-
+        
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['role'] = $row['role'];
+                    if( $_SESSION['role']==="Reader")
+                    {
+                        $sql_customer = "SELECT * FROM customer WHERE email='$email'";// AND password='$password'";
+                        $result_customer = mysqli_query($Conn, $sql_customer);
+                        $res_customer = mysqli_fetch_assoc($result_customer);
+                        $_SESSION['user_name'] = $res_customer['name'];
+                       // echo $_SESSION['user_name'];
+    
+                        $_POST['password'] = "";
+                        $_POST['email'] = "";
+                        //unset($user_name);
+                        header("Location: ../userProfiles/customer/browseBooks/index.php");
+                        // echo"hello ". $row['email'];
+    
+                    }
+                 else
+                    {
+                         $sql_deliveryman = "SELECT * FROM deliveryman WHERE email='$email'";// AND password='$password'";
+                        $result_deliveryman = mysqli_query($Conn, $sql_deliveryman);
+                        $res = mysqli_fetch_assoc($result_deliveryman);
+                        $_SESSION['user_name'] = $res['name'];
+                        echo $_SESSION['user_name'];
+                        $_POST['password'] = "";
+                        $_POST['email'] = "";
+                        //unset($user_name);
+                        header("Location: ../userProfiles/delivery/index.php");
+                        // echo"hello ". $row['email'];
+    
+                    }
+        
+                }
+                else 
+                {
+                    $WrongPass="Wrong Password.";
                     $_POST['password'] = "";
                     $_POST['email'] = "";
-                    //unset($user_name);
-                    header("Location: ../userProfiles/customer/dashboard.php");
-                    // echo"hello ". $row['email'];
-
+                    unset($user_name);
                 }
-             else
-                {
-                     $sql_deliveryman = "SELECT * FROM deliveryman WHERE email='$email'";// AND password='$password'";
-	                $result_deliveryman = mysqli_query($Conn, $sql_deliveryman);
-                    $res = mysqli_fetch_assoc($result_deliveryman);
-                    $_SESSION['user_name'] = $res['name'];
-                    echo $_SESSION['user_name'];
-                    $_POST['password'] = "";
-                    $_POST['email'] = "";
-                    //unset($user_name);
-                    header("Location: ../userProfiles/delivery/dashboard.php");
-                    // echo"hello ". $row['email'];
-
-                }
-    
-            }
-            else 
-            {
-                $WrongPass="Wrong Password.";
-                $_POST['password'] = "";
-                $_POST['email'] = "";
-                unset($user_name);
-            }
-       
-	} 
-    else 
-    {
-        $WrongUser="Invalid Email.";
-        $_POST['password'] = "";
-        $_POST['email'] = "";
-        unset($user_name);
-        // echo "<p class='er'>Wrong Password.</big></p>";
-	}
+           
+        } 
+        else 
+        {
+            $WrongUser="Invalid Email.";
+            $_POST['password'] = "";
+            $_POST['email'] = "";
+            unset($user_name);
+            // echo "<p class='er'>Wrong Password.</big></p>";
+        }
+    }
 }
 ?>
 

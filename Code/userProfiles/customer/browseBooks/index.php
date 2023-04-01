@@ -48,8 +48,14 @@ $result = mysqli_query($Conn, $sql);
                     <div id="product-1" class="single-product">
                         <div class="part-1">
                             <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+
+                                <form action="" method="post">
+                                    <li><input type="submit" value="update" name="add_btn"><a href="#"><i
+                                                class="fas fa-shopping-cart">+</i></a></li>
+                                </form>
+                                <form action="" method="post">
+                                    <li><a href="#"><i class="fas fa-heart">-</i></a></li>
+                                </form>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -68,7 +74,7 @@ $result = mysqli_query($Conn, $sql);
           // Close the database connection
           mysqli_close($Conn);
           ?>
-                
+
             </div>
         </div>
     </section>
