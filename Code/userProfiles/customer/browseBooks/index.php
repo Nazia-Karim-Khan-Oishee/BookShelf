@@ -1,7 +1,7 @@
 <?php 
 include '../../../Database/Config.php';
 
-// Query to fetch all books from the book table
+// Query to fetch book ID, name, and author from the book table
 $sql = "SELECT * FROM book";
 
 // Execute the query
@@ -48,14 +48,7 @@ $result = mysqli_query($Conn, $sql);
                     <div id="product-1" class="single-product">
                         <div class="part-1">
                             <ul>
-
-                                <form action="" method="post">
-                                    <li><input type="submit" value="update" name="add_btn"><a href="#"><i
-                                                class="fas fa-shopping-cart">+</i></a></li>
-                                </form>
-                                <form action="" method="post">
-                                    <li><a href="#"><i class="fas fa-heart">-</i></a></li>
-                                </form>
+                                <li><a href="../Book/index.php?ISBN=<?php echo $row["ISBN"] ?>"><i class="fas fa-info-circle"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -76,7 +69,7 @@ $result = mysqli_query($Conn, $sql);
           ?>
 
             </div>
-        </div>
+            </div>
     </section>
 </body>
 
