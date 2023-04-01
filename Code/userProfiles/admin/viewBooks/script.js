@@ -1,30 +1,31 @@
-function addQuantity(button) {
-    // Get the quantity cell of the row containing the clicked button
-    var quantityCell = button.parentNode.previousSibling;
+// Open add quantity modal
+
+// Add quantity
+function addQuantity() {
+  let quantity = document.getElementById('quantity').value;
+  // Do something with the quantity value
+  closeAddQuantityModal();
+}
+
+// Remove copy
+function removeCopy() {
+  let copyId = document.getElementById('copyId').value;
+  // Do something with the copyId value
+  closeRemoveCopyModal();
+}
+
+// Close modal when user clicks outside of it
+window.onclick = function(event) {
+  let addQuantityModal = document.getElementById('addQuantityModal');
+  let removeCopyModal = document.getElementById('removeCopyModal');
   
-    // Get the current quantity value
-    var currentQuantity = parseInt(quantityCell.textContent);
-  
-    // Increment the quantity by 1
-    var newQuantity = currentQuantity + 1;
-  
-    // Update the quantity cell with the new value
-    quantityCell.textContent = newQuantity;
+  if (event.target == addQuantityModal) {
+      addQuantityModal.style.display = 'none';
+  } else if (event.target == removeCopyModal) {
+      removeCopyModal.style.display = 'none';
   }
-  
-  function removeQuantity(button) {
-    // Get the quantity cell of the row containing the clicked button
-    var quantityCell = button.parentNode.previousSibling;
-  
-    // Get the current quantity value
-    var currentQuantity = parseInt(quantityCell.textContent);
-  
-    // Decrement the quantity by 1, but only if it's greater than 0
-    var newQuantity = currentQuantity > 0 ? currentQuantity - 1 : 0;
-  
-    // Update the quantity cell with the new value
-    quantityCell.textContent = newQuantity;
-  }
+}
+
   // Search and filter function
   function searchBooks() {
     // Get the search input, filter select elements, and their values
@@ -61,7 +62,38 @@ function addQuantity(button) {
   // Add event listeners to search input and filter select elements
   document.getElementById("search-input").addEventListener("keyup", searchBooks);
   document.getElementById("filter-select").addEventListener("change", searchBooks);
+
+
+
+
+//---------------------------------------------------------------- removed codes
+  // function addQuantity(button) {
+//     // Get the quantity cell of the row containing the clicked button
+//     var quantityCell = button.parentNode.previousSibling;
   
+//     // Get the current quantity value
+//     var currentQuantity = parseInt(quantityCell.textContent);
+  
+//     // Increment the quantity by 1
+//     var newQuantity = currentQuantity + 1;
+  
+//     // Update the quantity cell with the new value
+//     quantityCell.textContent = newQuantity;
+//   }
+  
+//   function removeQuantity(button) {
+//     // Get the quantity cell of the row containing the clicked button
+//     var quantityCell = button.parentNode.previousSibling;
+  
+//     // Get the current quantity value
+//     var currentQuantity = parseInt(quantityCell.textContent);
+  
+//     // Decrement the quantity by 1, but only if it's greater than 0
+//     var newQuantity = currentQuantity > 0 ? currentQuantity - 1 : 0;
+  
+//     // Update the quantity cell with the new value
+//     quantityCell.textContent = newQuantity;
+//   }
   
   
   
