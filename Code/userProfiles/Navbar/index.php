@@ -1,6 +1,7 @@
 <?php
     
     require 'script.php';
+    require 'style.php';
     
     function navbarCustomer(){
         ?>
@@ -28,7 +29,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -36,6 +37,7 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
     }
 
@@ -65,7 +67,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -73,6 +75,7 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
   }
 
@@ -93,7 +96,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary"><a href="../../LoginAuth/logout.php">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -101,6 +104,7 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
 }
     function navbarLanding(){
@@ -116,6 +120,7 @@
 </nav>
 
 <!-- <?php echo navscript(); ?> -->
+<?php echo style(); ?>
 <?php
 }
 ?>

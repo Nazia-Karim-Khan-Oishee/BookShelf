@@ -14,11 +14,12 @@ $result = mysqli_query($Conn, $sql);
 
 <head>
     <title>Products Page</title>
+    <script defer src="script.js"></script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>
-    <script defer src="script.js"></script>
+    
     <link href="style.css" rel="stylesheet" />
 </head>
 
@@ -70,16 +71,58 @@ $result = mysqli_query($Conn, $sql);
               echo "<td>".$row["edition"]."</td>";
               echo "<td>".$row["author"]."</td>";
               echo "<td>".$row["publisher"]."</td>";
-              echo "<td>". 5
-              // $sqll = 'SELECT count(*) as quantity FROM all_copies_of_books where all_copies_of_books.ISBN = $row['ISBN']';
-              // $result2 = mysqli_query($Conn, $sqll);
-              // $row2 = mysqli_fetch_assoc($result2);
-              // echo ( $row2);
-              .
+              echo "<td>". 
                 "</td>";
                 echo "<td>";
-                    echo "<button class='btn btn-success'>+</button>";
-                    echo "<button class='btn btn-danger'>-</button>";
+                echo "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#addQuantityModal'>+</button>";
+                echo "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#removeCopyModal'>-</button>";
+                
+                // Modal for adding quantity
+                echo "<div class='modal fade' id='addQuantityModal' tabindex='-1' role='dialog' aria-labelledby='addQuantityModalLabel' aria-hidden='true'>
+                        <div class='modal-dialog' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='addQuantityModalLabel'>Add Quantity</h5>
+                                </div>
+                                <div class='modal-body'>
+                                    <form>
+                                        <div class='form-group'>
+                                            <label for='quantity'>Quantity</label>
+                                            <input type='number' class='form-control' id='quantity' name='quantity' required>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                    <button type='button' class='btn btn-primary' name='add' onclick='addQuantity()'>Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>";
+                
+                // Modal for removing copy
+                echo "<div class='modal fade' id='removeCopyModal' tabindex='-1' role='dialog' aria-labelledby='removeCopyModalLabel' aria-hidden='true'>
+                        <div class='modal-dialog' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='removeCopyModalLabel'>Remove Copy</h5>
+                                </div>
+                                <div class='modal-body'>
+                                    <form>
+                                        <div class='form-group'>
+                                            <label for='copyId'>Copy ID</label>
+                                            <input type='text' class='form-control' id='copyId' name='copyId' required>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                    <button type='button' class='btn btn-primary' name='remove' onclick='removeCopy()'>Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>";
+                
                     echo "</td>";
                 echo "</tr>";
                 }
