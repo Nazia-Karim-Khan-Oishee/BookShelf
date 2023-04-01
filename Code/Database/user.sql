@@ -159,7 +159,7 @@ CREATE TABLE `book_location_delivery` (
   `delivery_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ISBN` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `copy_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `copy_id` int(11) NOT NULL,
   `location_id` decimal(10,0) NOT NULL,
   `delivery_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -174,7 +174,7 @@ CREATE TABLE `book_location_retrieval` (
   `retrieval_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ISBN` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `copy_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `copy_id` int(11) NOT NULL,
   `location_id` decimal(10,0) NOT NULL,
   `retrieval_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -211,7 +211,7 @@ CREATE TABLE `customer` (
 CREATE TABLE `customer_book` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ISBN` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `copy_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `copy_id` int(11) NOT NULL,
   `return_date` datetime NOT NULL,
   `issue_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -302,8 +302,9 @@ ALTER TABLE `book`
 ALTER TABLE `book_location_delivery`
   ADD PRIMARY KEY (`delivery_id`),
   ADD KEY `fk_book_location_delivery1` (`location_id`),
-  ADD KEY `fk_book_location_delivery2` (`ISBN`,`copy_id`),
-  ADD KEY `fk_book_location_delivery3` (`email`);
+  ADD KEY `fk_book_location_delivery2` (`copy_id`),
+  ADD KEY `fk_book_location_delivery3` (`email`),
+  ADD KEY `fk_book_location_delivery4` (`ISBN`);
 
 --
 -- Indexes for table `book_location_retrieval`
@@ -311,8 +312,9 @@ ALTER TABLE `book_location_delivery`
 ALTER TABLE `book_location_retrieval`
   ADD PRIMARY KEY (`retrieval_id`),
   ADD KEY `fk_book_location_retrieval1` (`location_id`),
-  ADD KEY `fk_book_location_retrieval2` (`ISBN`,`copy_id`),
-  ADD KEY `fk_book_location_retrieval3` (`email`);
+  ADD KEY `fk_book_location_retrieval2` (`copy_id`),
+  ADD KEY `fk_book_location_retrieval3` (`ISBN`),
+  ADD KEY `fk_book_location_retrieval4` (`email`);
 
 --
 -- Indexes for table `customer`
@@ -325,7 +327,8 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `customer_book`
   ADD PRIMARY KEY (`email`,`ISBN`,`copy_id`),
-  ADD KEY `fk_customer_book2` (`ISBN`,`copy_id`);
+  ADD KEY `fk_customer_book1` (`ISBN`),
+  ADD KEY `fk_customer_book2` (`copy_id`);
 
 --
 -- Indexes for table `deliveryman`
@@ -368,16 +371,18 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `book_location_delivery`
   ADD CONSTRAINT `fk_book_location_delivery1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
-  ADD CONSTRAINT `fk_book_location_delivery2` FOREIGN KEY (`ISBN`,`copy_id`) REFERENCES `customer_book` (`ISBN`, `copy_id`),
-  ADD CONSTRAINT `fk_book_location_delivery3` FOREIGN KEY (`email`) REFERENCES `users` (`email`);
+  ADD CONSTRAINT `fk_book_location_delivery2` FOREIGN KEY (`copy_id`) REFERENCES `customer_book` (`copy_id`),
+  ADD CONSTRAINT `fk_book_location_delivery3` FOREIGN KEY (`email`) REFERENCES `users` (`email`),
+  ADD CONSTRAINT `fk_book_location_delivery4` FOREIGN KEY (`ISBN`) REFERENCES `customer_book` (`ISBN`);
 
 --
 -- Constraints for table `book_location_retrieval`
 --
 ALTER TABLE `book_location_retrieval`
   ADD CONSTRAINT `fk_book_location_retrieval1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
-  ADD CONSTRAINT `fk_book_location_retrieval2` FOREIGN KEY (`ISBN`,`copy_id`) REFERENCES `customer_book` (`ISBN`, `copy_id`),
-  ADD CONSTRAINT `fk_book_location_retrieval3` FOREIGN KEY (`email`) REFERENCES `users` (`email`);
+  ADD CONSTRAINT `fk_book_location_retrieval2` FOREIGN KEY (`copy_id`) REFERENCES `customer_book` (`copy_id`),
+  ADD CONSTRAINT `fk_book_location_retrieval3` FOREIGN KEY (`ISBN`) REFERENCES `customer_book` (`ISBN`),
+  ADD CONSTRAINT `fk_book_location_retrieval4` FOREIGN KEY (`email`) REFERENCES `users` (`email`);
 
 --
 -- Constraints for table `customer`
@@ -388,9 +393,12 @@ ALTER TABLE `customer`
 --
 -- Constraints for table `customer_book`
 --
+ALTER TABLE `all_copies_of_books`
+  MODIFY `copy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 ALTER TABLE `customer_book`
   ADD CONSTRAINT `fk_customer_book1` FOREIGN KEY (`email`) REFERENCES `users` (`email`),
-  ADD CONSTRAINT `fk_customer_book2` FOREIGN KEY (`ISBN`,`copy_id`) REFERENCES `all_copies_of_book` (`ISBN`, `copy_id`);
+  ADD CONSTRAINT `fk_customer_book2` FOREIGN KEY (`copy_id`) REFERENCES `all_copies_of_books` (`copy_id`),
+  ADD CONSTRAINT `fk_customer_book3` FOREIGN KEY (`ISBN`) REFERENCES `book` (`ISBN`);
 
 --
 -- Constraints for table `deliveryman`
@@ -398,8 +406,7 @@ ALTER TABLE `customer_book`
 ALTER TABLE `deliveryman`
   ADD CONSTRAINT `deliveryMan_fk` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-ALTER TABLE `all_copies_of_books`
-  MODIFY `copy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
