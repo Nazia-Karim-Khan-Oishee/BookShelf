@@ -4,6 +4,9 @@ body {
     font-family: "Poppins", sans-serif;
     color: #444444;
 }
+.mt-4{
+  margin-top: 6rem !important;
+}
 th {
     text-align: center;
   }

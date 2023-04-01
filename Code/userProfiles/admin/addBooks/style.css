@@ -4,6 +4,9 @@ body {
     font-family: "Poppins", sans-serif;
     color: #444444;
 }
+.mt-3{
+    margin-top: 6rem !important;
+  }
 .card.addBook-card{
     width: 50% !important;
 }

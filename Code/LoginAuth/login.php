@@ -21,8 +21,6 @@ if (isset($_SESSION['email']))
     {
       header("Location: ../userProfiles/delivery/index.php");
     }  
-    //  header("Location: dashboard.php");
-    //  echo"hello world";
 
 }
 
