@@ -82,7 +82,7 @@ if (isset($_GET['ISBN'])) {
                     <div class="card mb-3" style="max-width: 768px;width:768px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="/Bookshelf/Bookshelf/Code/img/book3.jpg" alt="<?php echo $book['name'] ?>" class="product-image">
+                                <img src="/Bookshelf/Code/img/book3.jpg" alt="<?php echo $book['name'] ?>" class="product-image">
                             </div>
                             <div class="col-md-8 d-flex">
                                 <div class="card-body">
