@@ -302,6 +302,7 @@ ALTER TABLE `customer_book`
 --
 ALTER TABLE `deliveryman`
   ADD CONSTRAINT `deliveryMan_fk` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  alter table all_copies_of_books add borrowed tinyint(1) DEFAULT 0;
 COMMIT;
 
 COMMIT;
