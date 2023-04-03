@@ -4,14 +4,14 @@
 function addQuantity() {
   let quantity = document.getElementById('quantity').value;
   // Do something with the quantity value
-  closeAddQuantityModal();
+  // closeAddQuantityModal();
 }
 
 // Remove copy
 function removeCopy() {
   let copyId = document.getElementById('copyId').value;
   // Do something with the copyId value
-  closeRemoveCopyModal();
+  // closeRemoveCopyModal();
 }
 
 // Close modal when user clicks outside of it

@@ -56,7 +56,7 @@
                     <a class="nav-link" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Book Management</a>
+                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/viewBooks/index.php">Book Management</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Loan Management</a>
