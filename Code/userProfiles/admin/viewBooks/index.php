@@ -76,14 +76,7 @@ $result = mysqli_query($Conn, $sql);
               echo "<td>".$row["author"]."</td>";
               echo "<td>".$row["publisher"]."</td>";
 
-              echo "<td>". $number_of_books
-              // $sqll = 'SELECT count(*) as quantity FROM all_copies_of_books where all_copies_of_books.ISBN = $row['ISBN']';
-              // $result2 = mysqli_query($Conn, $sqll);
-              // $row2 = mysqli_fetch_assoc($result2);
-              // echo ( $row2);
-              .
-
-                "</td>";
+              echo "<td>". $number_of_books."</td>";
                 echo "<td>";
                 echo "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#addQuantityModal'>+</button>";
                 echo "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#removeCopyModal'>-</button>";
