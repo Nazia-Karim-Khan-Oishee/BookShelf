@@ -1,6 +1,7 @@
 <?php 
 include '../../../Database/Config.php';
 $SuccessMessage="";
+
 if(isset($_POST['submit'])){
 $book_name = mysqli_real_escape_string($Conn, $_POST['book_name']);
 $isbn = mysqli_real_escape_string($Conn, $_POST['isbn']);
@@ -8,9 +9,14 @@ $author_name = mysqli_real_escape_string($Conn, $_POST['author_name']);
 $publisher_name = mysqli_real_escape_string($Conn, $_POST['publisher_name']);
 $edition_no = mysqli_real_escape_string($Conn, $_POST['edition_no']);
 $quantity = mysqli_real_escape_string($Conn, $_POST['quantity']);
+$Get_image_name = $_FILES['image']['name'];
+$image_Path = "../../../../images/".basename($Get_image_name);
+
+
 $dummy_quantity=$quantity;
 $SuccessMessage="";
-$sql = "INSERT INTO book (ISBN, name,  author, edition, publisher) VALUES ('$isbn', '$book_name', '$author_name',  '$edition_no', '$publisher_name')";
+
+$sql = "INSERT INTO book (ISBN, name,  author, edition, publisher, image) VALUES ('$isbn', '$book_name', '$author_name',  '$edition_no', '$publisher_name', '$Get_image_name')";
 $sql2 = "INSERT INTO all_copies_of_books (ISBN) VALUES ('$isbn')";
 while($dummy_quantity>0)
 {
@@ -18,6 +24,7 @@ while($dummy_quantity>0)
   $dummy_quantity--;
 }
 if(mysqli_query($Conn, $sql) ){
+move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
   $SuccessMessage ="Books added successfully.";
   // echo "Book added successfully.";
 } else{
@@ -60,7 +67,7 @@ mysqli_close($Conn);
             <div class="card-header bg-dark">Add new book</div>
 
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">Book Name:</span>
                         <input type="text" class="form-control" name="book_name" aria-label="Sizing example input"
@@ -91,10 +98,10 @@ mysqli_close($Conn);
                         <input type="text" class="form-control" name="quantity" aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <!-- <div class="mb-3">
-          <label for="formFile" class="form-label">Upload Photo</label>
-          <input class="form-control" type="file" id="formFile">
-        </div> -->
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Photo</label>
+                        <input class="form-control" type="file" name="image" id="file">
+                    </div>
                     <button type="submit" name="submit" class="btn btn-dark">Add Book</button><br>
                     <span class="error"> <?php echo $SuccessMessage;?></span>
                 </form>
