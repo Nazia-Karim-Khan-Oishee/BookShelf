@@ -19,7 +19,7 @@ if (isset($_SESSION['email']))
       }
     else 
     {
-      header("Location: ../userProfiles/delivery/index.php");
+      header("Location: ../userProfiles/delivery/checklist.php");
     }  
 
 }
@@ -74,7 +74,7 @@ if (isset($_POST['submit']))
                         $_POST['password'] = "";
                         $_POST['email'] = "";
                         //unset($user_name);
-                        header("Location: ../userProfiles/delivery/index.php");
+                        header("Location: ../userProfiles/delivery/checklist.php");
                         // echo"hello ". $row['email'];
     
                     }
