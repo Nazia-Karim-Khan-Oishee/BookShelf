@@ -111,8 +111,8 @@ a:hover {
   text-shadow: none;
 }
 .title {
-  font-size: 3.5em;
-  font-weight: 500;
+  font-size: 2.9em;
+  font-weight: 400;
   margin: 0.5em 0.2em 0.375em;
   text-align: center;
 }
@@ -120,7 +120,7 @@ a:hover {
   color: #000;
   border: 0;
 }
-.progress {
+.progressss {
   margin-bottom: 5px;
   text-align: center;
 }
@@ -130,7 +130,7 @@ a:hover {
   font-size: 1.15em;
   letter-spacing: 0.05em;
 }
-.progress__reset {
+.progressss__reset {
   font-family: inherit;
   line-height: 37px;
   display: inline-block;
@@ -151,21 +151,21 @@ a:hover {
   box-shadow: 0 4px 6px rgba(33, 16, 118, 0.11),
     0 1px 3px rgba(33, 16, 118, 0.1);
 }
-.progress__reset:focus,
-.progress__reset:hover {
+.progressss__reset:focus,
+.progressss__reset:hover {
   background: rgba(189, 106, 255, 0.8);
   -webkit-box-shadow: 0 7px 14px rgba(33, 16, 118, 0.16),
     0 3px 6px rgba(33, 16, 118, 0.2);
   box-shadow: 0 7px 14px rgba(33, 16, 118, 0.16),
     0 3px 6px rgba(33, 16, 118, 0.2);
 }
-.progress__reset:active {
+.progressss__reset:active {
   -webkit-box-shadow: 0 4px 6px rgba(33, 16, 118, 0.11),
     0 1px 3px rgba(33, 16, 118, 0.1);
   box-shadow: 0 4px 6px rgba(33, 16, 118, 0.11),
     0 1px 3px rgba(33, 16, 118, 0.1);
 }
-.progress__reset--pressed {
+.progressss__reset--pressed {
   -webkit-animation: wiggle 350ms ease alternate;
   animation: wiggle 350ms ease alternate;
 }
@@ -542,4 +542,28 @@ footer span {
     widows: 3;
     page-break-after: avoid;
   }
+}
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
+}
+
+.button1:hover {
+  background-color: #4caf50;
+  color: white;
 }
