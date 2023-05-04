@@ -49,7 +49,7 @@ if (isset($_POST['submit']))
                         <li class="checklist-item">
                             <input id="" type="checkbox" name='chk1[]' /><label for="" class="checkbox"></label><span
                                 class="checklist-item__title">Images Optimized</span>
-                            <button class="checklist-item__expand" aria-label="Toggle Info"
+                            <button class="checklist-item__expandbtn" aria-label="Toggle Info"
                                 title="Toggle More Information">
                                 <span class="line"></span>
                             </button>
@@ -87,7 +87,7 @@ if (isset($_POST['submit']))
                     const checkboxValues =
                         JSON.parse(localStorage.getItem("checkboxValues")) || {},
                         buttons = Array.from(
-                            document.querySelectorAll(".checklist-item__expand")
+                            document.querySelectorAll(".checklist-item__expandbtn")
                         ),
                         labels = Array.from(
                             document.querySelectorAll(".checklist-item__title")

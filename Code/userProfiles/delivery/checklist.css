@@ -379,6 +379,15 @@ input[type="checkbox"]:checked ~ .checklist-item__title {
   outline: 0;
   background: 0 0;
 }
+.checklist-item__expandbtn {
+  float: right;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+}
 .line {
   display: block;
   width: 20px;
