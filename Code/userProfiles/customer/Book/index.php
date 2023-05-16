@@ -9,17 +9,16 @@ if (isset($_GET['ISBN'])) {
     $ISBN = $_GET['ISBN'];
 
     // Query to fetch the book with the specified ID from the book table
-    $sql = "SELECT * FROM book WHERE ISBN = $ISBN";
-
+    $sql = "SELECT ISBN FROM book WHERE ISBN = '$ISBN'";
     // Execute the query
     $result = mysqli_query($Conn, $sql);
     $disabled="";
    
 
     // Check if the query was successful and if there is exactly one record
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result)) {
         $email = $_SESSION['email'];
-        $sql = "SELECT count(*) as count from all_copies_of_books where ISBN = $ISBN and borrowed=0" ;
+        $sql = "SELECT count(*) as count from all_copies_of_books where ISBN = '$ISBN' and borrowed=0" ;
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count = $row["count"];
@@ -89,207 +88,216 @@ if (isset($_GET['ISBN'])) {
 
 ?>
 
-        <!DOCTYPE html>
-        <html>
+<!DOCTYPE html>
+<html>
 
-        <head>
-            <title><?php echo $book['name'] ?></title>
-            <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
-            <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="../../../js/bootstrap.min.js"></script>
-            <link href="../style.css" rel="stylesheet" />
-            <link href="style.css" rel="stylesheet" />
-        </head>
+<head>
+    <title><?php echo $book['name'] ?></title>
+    <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
+    <link href="../style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
 
-        <body>
-            <?php
+<body>
+    <?php
             require 'navbar.php';
             Navbar();
             ?>
-            <section class="section-product-details">
-                <div class="container d-flex justify-content-center mt-5">
+    <section class="section-product-details">
+        <div class="container d-flex justify-content-center mt-5">
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <label for="exampleFormControlInput1" class="form-label mb-3">Duration in weeks
+                                    :</label>
+                                <select class="form-select mb-3" aria-label="Default select example" id="duration"
+                                    name="duration">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="3">4</option>
+                                </select>
+                                <label for="address" class="form-label mb-3">Address:</label>
+                                <select class="form-select mb-3" id="division" name="division">
+                                    <option selected>Select Division</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Chittagong">Chittagong</option>
+                                    <option value="Khulna">Khulna</option>
+                                    <option value="Barisal">Barisal</option>
+                                    <option value="Mymensingh">Mymensingh</option>
+                                    <option value="Rajshahi">Rajshahi</option>
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Rangpur">Rangpur</option>
+                                </select>
+                                <select class="form-select mb-3" id="district" name="district">
+                                    <option selected>Select District</option>
+                                </select>
+                                <select class="form-select mb-3" id="area" name="area">
+                                    <option selected>Select Area</option>
+                                </select>
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Enter delivery point..">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="submit" class="btn btn-primary">Borrow</button>
                                 </div>
-                                <div class="modal-body">
-                                    <form action="" method="POST">
-                                        <label for="exampleFormControlInput1" class="form-label mb-3">Duration in weeks :</label>
-                                        <select class="form-select mb-3" aria-label="Default select example" id="duration" name="duration">
-                                            <option value="1" selected>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="3">4</option>
-                                        </select>
-                                        <label for="address" class="form-label mb-3">Address:</label>
-                                        <select class="form-select mb-3" id="division" name="division">
-                                            <option selected>Select Division</option>
-                                            <option value="Dhaka">Dhaka</option>
-                                            <option value="Chittagong">Chittagong</option>
-                                            <option value="Khulna">Khulna</option>
-                                            <option value="Barisal">Barisal</option>
-                                            <option value="Mymensingh">Mymensingh</option>
-                                            <option value="Rajshahi">Rajshahi</option>
-                                            <option value="Sylhet">Sylhet</option>
-                                            <option value="Rangpur">Rangpur</option>
-                                        </select>
-                                        <select class="form-select mb-3" id="district" name="district">
-                                            <option selected>Select District</option>
-                                        </select>
-                                        <select class="form-select mb-3" id="area" name="area">
-                                            <option selected>Select Area</option>
-                                        </select>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter delivery point..">
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="submit" class="btn btn-primary"  >Borrow</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-
-                    <div class="card mb-3" style="max-width: 768px;width:768px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="/Bookshelf/Code/img/book3.jpg" alt="<?php echo $book['name'] ?>" class="product-image">
-                            </div>
-                            <div class="col-md-8 d-flex">
-                                <div class="card-body">
-                                    <div class="book-description m-5">
-                                        <h2 class="product-title"><?php echo $book['name'] ?></h2>
-                                        <h3 class="product-author"><?php echo $book['author'] ?></h3>
-                                        <p class="product-description">Description</p>
-                                        <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
-                                        <button class="btn btn-primary" <?php echo $disabled ?> data-bs-toggle="modal" data-bs-target="#exampleModal">Borrow Book</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
-            </section>
-        </body>
-        <script>
-            $(document).ready(function() {
-                $("#division").change(function() {
-                    var division = $(this).val();
-                    $.ajax({
-                        url: "fetch-districts.php",
-                        method: "POST",
-                        data: {
-                            division: division
-                        },
-                        dataType: "text",
-                        success: function(data) {
-                            $("#district").html(data);
-                            var districtsString = data.substring(data.indexOf('["') + 2, data.lastIndexOf('"]'));
-                            var districts = districtsString.split('","');
-                            for (var i = 0; i < districts.length; i++) {
-                                var option = document.createElement("option");
-                                option.value = districts[i];
-                                option.text = districts[i];
-                                districtSelect.appendChild(option);
-                                console.log(districts[i]);
-                            }
-                        }
-                    });
-                });
+            </div>
 
-                $("#district").change(function() {
-                    var district = $(this).val();
-                    $.ajax({
-                        url: "fetch-areas.php",
-                        method: "POST",
-                        data: {
-                            district: district
-                        },
-                        dataType: "text",
-                        success: function(data) {
-                            $("#area").html(data);
-                            var areasString = data.substring(data.indexOf('["') + 2, data.lastIndexOf('"]'));
-                            var areas = areasString.split('","');
-                            for (var i = 0; i < areas.length; i++) {
-                                var option = document.createElement("option");
-                                option.value = areas[i];
-                                option.text = areas[i];
-                                areaSelect.appendChild(option);
-                                console.log(areas[i]);
-                            }
-                        }
-                    });
-                });
-            });
-
-            var divisionSelect = document.getElementById("division");
-            var districtSelect = document.getElementById("district");
-            var areaSelect = document.getElementById("area");
-
-            // Add an event listener to the division select element
-            divisionSelect.addEventListener("change", function() {
-                // Clear the district and area select options
-                districtSelect.innerHTML = "<option value=''>Select District</option>";
-                areaSelect.innerHTML = "<option value=''>Select Area</option>";
-
-                // Get the selected division value
-                var selectedDivision = divisionSelect.value;
+            <div class="card mb-3" style="max-width: 768px;width:768px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="/Bookshelf/Code/img/book3.jpg" alt="<?php echo $book['name'] ?>"
+                            class="product-image">
+                    </div>
+                    <div class="col-md-8 d-flex">
+                        <div class="card-body">
+                            <div class="book-description m-5">
+                                <h2 class="product-title"><?php echo $book['name'] ?></h2>
+                                <h3 class="product-author"><?php echo $book['author'] ?></h3>
+                                <p class="product-description">Description</p>
+                                <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
+                                <button class="btn btn-primary" <?php echo $disabled ?> data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Borrow Book</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-                // Make an AJAX request to get the districts for the selected division
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "fetch-districts.php?division=" + selectedDivision);
-                xhr.onload = function() {
-                    console.log(xhr.responseText);
-                    // Parse the JSON response
-                    var districts = JSON.parse(xhr.responseText);
-                    // Add the district options to the district select element
-                    for (var i = 0; i < districts.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = districts[i];
-                        option.text = districts[i];
-                        districtSelect.appendChild(option);
-                        console.log(districts[i]);
-                    }
-                };
-                xhr.send();
-            });
+        </div>
+    </section>
+</body>
+<script>
+$(document).ready(function() {
+    $("#division").change(function() {
+        var division = $(this).val();
+        $.ajax({
+            url: "fetch-districts.php",
+            method: "POST",
+            data: {
+                division: division
+            },
+            dataType: "text",
+            success: function(data) {
+                $("#district").html(data);
+                var districtsString = data.substring(data.indexOf('["') + 2, data
+                    .lastIndexOf('"]'));
+                var districts = districtsString.split('","');
+                for (var i = 0; i < districts.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = districts[i];
+                    option.text = districts[i];
+                    districtSelect.appendChild(option);
+                    console.log(districts[i]);
+                }
+            }
+        });
+    });
 
-            // Add an event listener to the district select element
-            districtSelect.addEventListener("change", function() {
-                // Clear the area select options
-                areaSelect.innerHTML = "<option value=''>Select Area</option>";
+    $("#district").change(function() {
+        var district = $(this).val();
+        $.ajax({
+            url: "fetch-areas.php",
+            method: "POST",
+            data: {
+                district: district
+            },
+            dataType: "text",
+            success: function(data) {
+                $("#area").html(data);
+                var areasString = data.substring(data.indexOf('["') + 2, data.lastIndexOf(
+                    '"]'));
+                var areas = areasString.split('","');
+                for (var i = 0; i < areas.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = areas[i];
+                    option.text = areas[i];
+                    areaSelect.appendChild(option);
+                    console.log(areas[i]);
+                }
+            }
+        });
+    });
+});
 
-                // Get the selected district value
-                var selectedDistrict = districtSelect.value;
+var divisionSelect = document.getElementById("division");
+var districtSelect = document.getElementById("district");
+var areaSelect = document.getElementById("area");
 
-                // Make an AJAX request to get the areas for the selected district
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "fetch-areas.php?district=" + selectedDistrict);
-                xhr.onload = function() {
-                    // Parse the JSON response
-                    var areas = JSON.parse(xhr.responseText);
+// Add an event listener to the division select element
+divisionSelect.addEventListener("change", function() {
+    // Clear the district and area select options
+    districtSelect.innerHTML = "<option value=''>Select District</option>";
+    areaSelect.innerHTML = "<option value=''>Select Area</option>";
 
-                    // Add the area options to the area select element
-                    for (var i = 0; i < areas.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = areas[i].id;
-                        option.text = areas[i].name;
-                        areaSelect.appendChild(option);
-                    }
-                };
-                xhr.send();
-            });
-        </script>
+    // Get the selected division value
+    var selectedDivision = divisionSelect.value;
 
-        </html>
+
+    // Make an AJAX request to get the districts for the selected division
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "fetch-districts.php?division=" + selectedDivision);
+    xhr.onload = function() {
+        console.log(xhr.responseText);
+        // Parse the JSON response
+        var districts = JSON.parse(xhr.responseText);
+        // Add the district options to the district select element
+        for (var i = 0; i < districts.length; i++) {
+            var option = document.createElement("option");
+            option.value = districts[i];
+            option.text = districts[i];
+            districtSelect.appendChild(option);
+            console.log(districts[i]);
+        }
+    };
+    xhr.send();
+});
+
+// Add an event listener to the district select element
+districtSelect.addEventListener("change", function() {
+    // Clear the area select options
+    areaSelect.innerHTML = "<option value=''>Select Area</option>";
+
+    // Get the selected district value
+    var selectedDistrict = districtSelect.value;
+
+    // Make an AJAX request to get the areas for the selected district
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "fetch-areas.php?district=" + selectedDistrict);
+    xhr.onload = function() {
+        // Parse the JSON response
+        var areas = JSON.parse(xhr.responseText);
+
+        // Add the area options to the area select element
+        for (var i = 0; i < areas.length; i++) {
+            var option = document.createElement("option");
+            option.value = areas[i].id;
+            option.text = areas[i].name;
+            areaSelect.appendChild(option);
+        }
+    };
+    xhr.send();
+});
+</script>
+
+</html>
 
 <?php
     } else {

@@ -48,7 +48,8 @@ $result = mysqli_query($Conn, $sql);
                     <div id="product-1" class="single-product">
                         <div class="part-1">
                             <ul>
-                                <li><a href="../Book/index.php?ISBN=<?php echo $row["ISBN"] ?>"><i class="fas fa-info-circle"></i></a></li>
+                                <li><a href="../Book/index.php?ISBN=<?php echo $row['ISBN'] ?>"><i
+                                            class="fas fa-info-circle"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -69,7 +70,7 @@ $result = mysqli_query($Conn, $sql);
           ?>
 
             </div>
-            </div>
+        </div>
     </section>
 </body>
 
