@@ -7,9 +7,10 @@ if (isset($_GET['ISBN'])) {
 
     // Retrieve the book ID from the URL parameter
     $ISBN = $_GET['ISBN'];
+    
 
     // Query to fetch the book with the specified ID from the book table
-    $sql = "SELECT ISBN FROM book WHERE ISBN = '$ISBN'";
+    $sql = "SELECT * FROM book WHERE ISBN = '$ISBN'";
     // Execute the query
     $result = mysqli_query($Conn, $sql);
     $disabled="";
@@ -21,7 +22,7 @@ if (isset($_GET['ISBN'])) {
         $sql = "SELECT count(*) as count from all_copies_of_books where ISBN = '$ISBN' and borrowed=0" ;
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
-        $count = $row["count"];
+        $count = $row['count'];
         $sql = "SELECT count(*) as count from customer_book where email = '$email'";
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
@@ -169,6 +170,7 @@ if (isset($_GET['ISBN'])) {
                         <div class="card-body">
                             <div class="book-description m-5">
                                 <h2 class="product-title"><?php echo $book['name'] ?></h2>
+                                <h2><?php echo $ISBN ?></h2>
                                 <h3 class="product-author"><?php echo $book['author'] ?></h3>
                                 <p class="product-description">Description</p>
                                 <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
