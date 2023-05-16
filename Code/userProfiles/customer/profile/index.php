@@ -38,7 +38,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
