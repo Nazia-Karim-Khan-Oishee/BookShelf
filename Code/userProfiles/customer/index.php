@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}; ?>
 <!DOCTYPE html>
 <html>
 <head>

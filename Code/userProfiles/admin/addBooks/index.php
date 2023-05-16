@@ -1,6 +1,12 @@
 <?php 
 include '../../../Database/Config.php';
 $SuccessMessage="";
+session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}
 
 if(isset($_POST['submit'])){
 $book_name = mysqli_real_escape_string($Conn, $_POST['book_name']);
