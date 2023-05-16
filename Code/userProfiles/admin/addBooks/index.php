@@ -7,7 +7,9 @@ if (!isset($_SESSION['email'])) {
     header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
     exit;
 }
+error_reporting(0);
 
+session_start();
 if(isset($_POST['submit'])){
 $book_name = mysqli_real_escape_string($Conn, $_POST['book_name']);
 $isbn = mysqli_real_escape_string($Conn, $_POST['isbn']);

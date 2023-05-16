@@ -60,7 +60,7 @@ if (isset($_POST['submit']))
                         $_POST['password'] = "";
                         $_POST['email'] = "";
                         //unset($user_name);
-                        header("Location: ../userProfiles/customer/browseBooks/index.php");
+                        header("Location: ../userProfiles/customer/profile/index.php");
                         // echo"hello ". $row['email'];
     
                     }
