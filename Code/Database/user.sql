@@ -470,3 +470,4 @@ INSERT INTO location (location_id, area, district, division, delivery_point, day
 (169, 'Sharsha', 'Jessore', 'Khulna', 'Sharsha Post Office', 'Thursday'),
 (170, 'Abhaynagar', 'Jessore', 'Khulna', 'Abhaynagar Post Office', 'Friday');
 
+
