@@ -30,6 +30,7 @@ if (isset($_POST['submit']))
             $password = ($_POST['password']);
     if($email === 'admin@gmail.com' && $password === 'admin')
     {
+        $_SESSION['email'] = 'admin@gmail.com';
         header("Location: ../userProfiles/admin/viewBooks/index.php");
         
     }
