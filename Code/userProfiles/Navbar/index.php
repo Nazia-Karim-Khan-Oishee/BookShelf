@@ -15,13 +15,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Browse Books</a>
+                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/customer/browsebooks/index.php">Browse Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My BookShelf</a>
+                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/customer/MyBookshelf/index.php">My BookShelf</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
@@ -59,7 +59,10 @@
                     <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/viewBooks/index.php">Book Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Loan Management</a>
+                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/loanManagement/index.php">Loan Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Assign Deliveryman</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
