@@ -61,6 +61,8 @@ CREATE TABLE `book` (
   `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`ISBN`);
 -- --------------------------------------------------------
 
 --
@@ -191,8 +193,7 @@ ALTER TABLE `all_copies_of_books`
 --
 -- Indexes for table `book`
 --
-ALTER TABLE `book`
-  ADD PRIMARY KEY (`ISBN`);
+
 
 --
 -- Indexes for table `book_location_delivery`
