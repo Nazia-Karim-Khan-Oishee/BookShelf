@@ -23,8 +23,35 @@ $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
     Navbar();
     ?>
     <div class="container">
-        <div>
-            <h1>Currently Borrowed Books</h1>
+        <div class="mt-5">
+            <h1>Currently Borrowed Book</h1>
+            <div class="card mb-3 " style="width:576px" >
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="<?php 
+                                if ($currentlyBorrowedBooksresult = mysqli_fetch_assoc($currentlyBorrowedBooks)) {
+                                    echo "../../../../images/".$currentlyBorrowedBooksresult['image'];
+                                }
+                                ?>"
+                            class="product-image">
+                    </div>
+                    <div class="col-md-8 d-flex">
+                    <div class="card-body">
+                            <div class="curr$currentlyBorrowedBooks-description m-5">
+                                <?php 
+                                
+                                    echo "<h2 class='product-title'>" . $currentlyBorrowedBooksresult['name'] . "</h2>";
+                                    echo "<h3 class='product-author'>" . $currentlyBorrowedBooksresult['author'] . "</h3>";
+                                    echo "<h5 class='product-publisher'>" ."Return date: ". date('d-m-Y', strtotime($currentlyBorrowedBooksresult['return_date'])) . "</h5>";
+
+                                    echo "<p class='product-description'>Description</p>";
+                                
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="d-flex justify-content-between mt-5">
             <h1>Previously Borrowed Books</h1>
@@ -42,7 +69,7 @@ $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
                     </select>
                 </div>
             </div>
-            <a href="../addBooks/index.php" class="btn btn-dark">Add New Book</a>
+            
         </div>
         <table id="book-table" class="table table-striped">
             <thead>
