@@ -1,5 +1,11 @@
 <?php 
 include '../../../Database/Config.php';
+session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}
 $sql = "SELECT name, contact_no, fine_amount, effective_date FROM customer WHERE fine_amount > 0 and effective_date < SYSDATE()";
 $result = $Conn->query($sql);
 ?>

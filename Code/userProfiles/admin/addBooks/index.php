@@ -1,6 +1,12 @@
 <?php 
 include '../../../Database/Config.php';
 $SuccessMessage="";
+session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}
 error_reporting(0);
 
 session_start();

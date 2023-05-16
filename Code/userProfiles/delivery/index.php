@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<?php session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}; ?>
 <head>
   <title>Products Page</title>
   <link href="../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />

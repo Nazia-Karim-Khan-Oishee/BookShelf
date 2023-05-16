@@ -2,7 +2,12 @@
 include '../../../Database/Config.php';
 
 // Check if a book ID is set in the URL
-session_start();
+session_start(); 
+if (!isset($_SESSION['email'])) {
+    // User is not logged in, redirect to the login page
+    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    exit;
+}
 if (isset($_GET['ISBN'])) {
 
     // Retrieve the book ID from the URL parameter
@@ -23,7 +28,7 @@ if (isset($_GET['ISBN'])) {
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count = $row['count'];
-        $sql = "SELECT count(*) as count from customer_book where email = '$email'";
+        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > sysdate()";
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count2 = $row["count"];
@@ -163,7 +168,7 @@ if (isset($_GET['ISBN'])) {
             <div class="card mb-3" style="max-width: 768px;width:768px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/Bookshelf/Code/img/book3.jpg" alt="<?php echo $book['name'] ?>"
+                        <img src="/Bookshelf/images/<?php echo $book['image'] ?>" alt="<?php echo $book['name'] ?>"
                             class="product-image">
                     </div>
                     <div class="col-md-8 d-flex">

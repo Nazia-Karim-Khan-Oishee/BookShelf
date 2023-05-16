@@ -5,6 +5,7 @@ body {
     color: #444444;
 }
 
+
 a,
 a:hover {
     text-decoration: none;
@@ -62,25 +63,18 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
-    background: url("../../../img/book3.jpg") no-repeat center;
-    background-size: cover;
-	transition: all 0.3s;
+    background-size: cover !important;
+	transition: all 0.3s !important;
+}
+.single-product .part-1{
+    background-size: cover !important;
+    transition: all 0.3s !important;
+    cursor: pointer;
+}
+.single-product:hover .part-1 {
+    transform: scale(1.15);
 }
 
-.section-products #product-2 .part-1::before {
-    background: url("../../../img/book1.jpg") no-repeat center;
-    background-size: cover;
-}
-
-.section-products #product-3 .part-1::before {
-    background: url("../../../img/book4.jpg") no-repeat center;
-    background-size: cover;
-}
-
-.section-products #product-4 .part-1::before {
-    background: url("../../../img/book2.jpg") no-repeat center;
-    background-size: cover;
-}
 
 .section-products .single-product .part-1 .discount,
 .section-products .single-product .part-1 .new {

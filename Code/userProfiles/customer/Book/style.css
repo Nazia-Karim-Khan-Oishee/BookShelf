@@ -21,3 +21,15 @@
     border-radius: 2%;
     
 }
+.animated-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url('tick.gif'); /* Replace with your own animated tick icon */
+    background-size: cover;
+    animation: play 1s steps(29) forwards;
+}
+
+@keyframes play {
+    100% { background-position: -580px; }
+}

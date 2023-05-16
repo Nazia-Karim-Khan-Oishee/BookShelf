@@ -5,6 +5,7 @@ function style(){
 .logout-button {
   text-decoration: none !important;
   color: black !important;
+  background-color: whitesmoke !important;
 }
 
 
