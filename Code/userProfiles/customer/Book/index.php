@@ -170,7 +170,7 @@ if (isset($_GET['ISBN'])) {
                         <div class="card-body">
                             <div class="book-description m-5">
                                 <h2 class="product-title"><?php echo $book['name'] ?></h2>
-                                <h2><?php echo $ISBN ?></h2>
+                             
                                 <h3 class="product-author"><?php echo $book['author'] ?></h3>
                                 <p class="product-description">Description</p>
                                 <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
