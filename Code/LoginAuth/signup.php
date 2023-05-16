@@ -131,7 +131,7 @@ if (isset($_POST['submit']))
                                 if($result && $result2 )
                                 {
     
-                                     header("Location: ../userProfiles/delivery/dashboard.php");
+                                     header("Location: ../userProfiles/delivery/checklist.php");
                                       unset($email);
                                     unset($password);
                                     unset($cpassword);
