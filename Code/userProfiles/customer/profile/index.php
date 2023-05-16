@@ -102,7 +102,7 @@ $result2=mysqli_query($Conn, $sql) ;
                 <div>
                     <div class="card profile-card">
                         <div class="card-body">
-                            <h4 class="card-title">Reader Profile</h4>
+                            <h4 class="card-title">Profile</h4>
                             <form id="form" action="" method="POST">
                                 <?php 
            $row = mysqli_fetch_assoc($result2)?>
@@ -111,14 +111,14 @@ $result2=mysqli_query($Conn, $sql) ;
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder=<?php echo $row[name]?> disabled>
+                                            placeholder=<?php echo $row['name']?> disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email"
-                                            placeholder=<?php echo $row[email]?> disabled>
+                                            placeholder=<?php echo $row['email']?> disabled>
                                     </div>
                                 </div>
 
@@ -126,7 +126,7 @@ $result2=mysqli_query($Conn, $sql) ;
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Contact</label>
                                         <input type="text" class="form-control" id="mobile" name="mobile"
-                                            placeholder=<?php echo $row[contact_no]?> disabled>
+                                            placeholder=<?php echo $row['contact_no']?> disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
