@@ -57,7 +57,8 @@ CREATE TABLE `book` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `author` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `edition` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -467,4 +468,5 @@ INSERT INTO location (location_id, area, district, division, delivery_point, day
 (168, 'Jhikargachha', 'Jessore', 'Khulna', 'Jhikargachha Post Office', 'Wednesday'),
 (169, 'Sharsha', 'Jessore', 'Khulna', 'Sharsha Post Office', 'Thursday'),
 (170, 'Abhaynagar', 'Jessore', 'Khulna', 'Abhaynagar Post Office', 'Friday');
+
 
