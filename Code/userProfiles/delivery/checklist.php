@@ -6,7 +6,10 @@ error_reporting(0);
 
 session_start();
 $user_name =  $_SESSION['user_name'];
+$sql = "SELECT * FROM book_location_delivery,location where location.location_id=book_location_delivery.location_id and ";
 
+// Execute the query
+$result = mysqli_query($Conn, $sql);
 // echo "Submit";
 if (isset($_POST['submit'])) 
 {
@@ -64,6 +67,10 @@ if (isset($_POST['submit2']))
 
     <div class="container">
         <section class="checklist">
+            <?php 
+        if($result)
+        {
+        ?>
             <form method="POST" action="">
                 <div>
                     <h2 class="checklist__title">To Deliver</h2>
@@ -234,7 +241,10 @@ if (isset($_POST['submit2']))
 
                 <!-- <input type="submit" name="submit" value="submit" required> -->
             </form>
+            <?php }
+        ?>
         </section>
+
         <section class="checklist">
             <form method="POST" action="">
                 <h2 class="checklist__title">To Receive</h2>
