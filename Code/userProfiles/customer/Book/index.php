@@ -177,9 +177,9 @@ if (isset($_GET['ISBN'])) {
                                 <h2 class="product-title"><?php echo $book['name'] ?></h2>
                              
                                 <h3 class="product-author"><?php echo $book['author'] ?></h3>
-                                <p class="product-description">Description</p>
+                                <h5 class="product-publisher"><?php echo $book['publisher'] ?></h5>
                                 <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
-                                <button class="btn btn-primary" <?php echo $disabled ?> data-bs-toggle="modal"
+                                <button class="btn btn-primary " <?php echo $disabled ?> data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Borrow Book</button>
                             </div>
                         </div>

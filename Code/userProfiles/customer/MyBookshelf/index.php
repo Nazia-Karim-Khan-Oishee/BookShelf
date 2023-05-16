@@ -56,7 +56,6 @@ $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
                                     echo "<h3 class='product-author'>" . $currentlyBorrowedBooksresult['author'] . "</h3>";
                                     echo "<h5 class='product-publisher'>" . "Return date: " . date('d-m-Y', strtotime($currentlyBorrowedBooksresult['return_date'])) . "</h5>";
 
-                                    echo "<p class='product-description'>Description</p>";
                                 } else {
                                     echo "<h4>No books currently borrowed</h4>";
                                 }
