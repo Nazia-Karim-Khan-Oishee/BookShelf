@@ -89,7 +89,7 @@ if (isset($_POST['submit']))
                                 if($result && $result2 )
                                 {
     
-                                     header("Location: ../userProfiles/customer/dashboard.php");
+                                     header("Location: ../userProfiles/customer/browseBooks/index.php");
                                       unset($email);
                                     unset($password);
                                     unset($cpassword);
