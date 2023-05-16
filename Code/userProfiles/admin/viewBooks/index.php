@@ -40,7 +40,9 @@ $sql = "SELECT * FROM book";
 $result = mysqli_query($Conn, $sql);
 ?>
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
     <title>Products Page</title>
     <script defer src="script.js"></script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -49,6 +51,7 @@ $result = mysqli_query($Conn, $sql);
     <script src="../../../js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" />
 </head>
+
 <body>
     <?php
     require 'navbar.php';
@@ -102,7 +105,7 @@ $result = mysqli_query($Conn, $sql);
               echo "<td>". $number_of_books."</td>";
                 echo "<td>";
                 echo "<button class='btn btn-success' data-bs-toggle='modal' data-bs-target='#addQuantityModal". $isbn."'>+</button>";
-                echo "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#removeCopyModal".$isbn."'>-</button>";
+                //echo "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#removeCopyModal".$isbn."'>-</button>";
                 echo "<div class='modal fade' id='addQuantityModal". $isbn."'  tabindex='-1' role='dialog' aria-labelledby='addQuantityModalLabel' aria-hidden='true'>
                         <div class='modal-dialog' role='document'>
                             <div class='modal-content'>
@@ -126,29 +129,30 @@ $result = mysqli_query($Conn, $sql);
                             </div>
                         </div>
                     </div>";
-                echo "<div class='modal fade' id='removeCopyModal".$isbn."' tabindex='-1' role='dialog' aria-labelledby='removeCopyModalLabel' aria-hidden='true'>
-                        <div class='modal-dialog' role='document'>
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h5 class='modal-title' id='removeCopyModalLabel'>Remove Copy</h5>
-                                </div>
-                                <div class='modal-body'>
-                                    <form action='' method='POST'>
-                                        <div class='form-group'>
-                                            <label for='copyId'>Copy ID</label>
-                                            <input type='hidden' name='isbn' value='". $isbn."'>
-                                            <input type='text' class='form-control' id='copyId' name='copyId' required>
-                                        </div>
+                // echo "<div class='modal fade' id='removeCopyModal".$isbn."' tabindex='-1' role='dialog' aria-labelledby='removeCopyModalLabel' aria-hidden='true'>
+                //         <div class='modal-dialog' role='document'>
+                //             <div class='modal-content'>
+                //                 <div class='modal-header'>
+                //                     <h5 class='modal-title' id='removeCopyModalLabel'>Remove Copy</h5>
+                //                 </div>
+                //                 <div class='modal-body'>
+                //                     <form action='' method='POST'>
+                //                         <div class='form-group'>
+                //                             <label for='copyId'>Copy ID</label>
+                //                             <input type='hidden' name='isbn' value='". $isbn."'>
+                //                             <input type='text' class='form-control' id='copyId' name='copyId' required>
+                //                         </div>
                                     
-                                </div>
-                                <div class='modal-footer'>
-                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                                    <button type='submit' name='remove' class='btn btn-primary' >Save changes</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>";
+                //                 </div>
+                //                 <div class='modal-footer'>
+                //                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+
+                //                     <button type='submit' name='remove' class='btn btn-primary' >Save changes</button>
+                //                 </div>
+                //                 </form>
+                //             </div>
+                //         </div>
+                //     </div>";
                 
                     echo "</td>";
                 echo "</tr>";
@@ -164,4 +168,5 @@ $result = mysqli_query($Conn, $sql);
         </table>
     </div>
 </body>
+
 </html>
