@@ -10,8 +10,8 @@ $user_name =  $_SESSION['user_name'];
 // echo "Submit";
 if (isset($_POST['submit'])) 
 {
-  if(!empty($_POST['chk1'])) {
-
+    if(!empty($_POST['chk1'])) {
+        
         foreach($_POST['chk1'] as $value){
             echo "value : ".$value.'<br/>';
         }
@@ -124,20 +124,20 @@ if (isset($_POST['submit2']))
                         counter = document.querySelector(".progress__count"),
                         reset = document.querySelector(".progressss__reset");
 
-                    function loadIds() {
-                        for (let a = 0; a < checkboxesLength; a += 1) {
-                            const b = (a) => a.replace(/[ ,.!?;:'-]/g, "");
-                            (checkboxes[a].id = `${b(
-                checkboxes[a].nextSibling.nextSibling.innerText
-              ).toLowerCase()}`),
-                            checkboxes[a].nextSibling.setAttribute(
-                                "for",
-                                `${b(
-                    checkboxes[a].nextSibling.nextSibling.innerText
-                  ).toLowerCase()}`
-                            );
-                        }
-                    }
+                    //         function loadIds() {
+                    //             for (let a = 0; a < checkboxesLength; a += 1) {
+                    //                 const b = (a) => a.replace(/[ ,.!?;:'-]/g, "");
+                    //                 (checkboxes[a].id = `${b(
+                    //     checkboxes[a].nextSibling.nextSibling.innerText
+                    //   ).toLowerCase()}`),
+                    //                 checkboxes[a].nextSibling.setAttribute(
+                    //                     "for",
+                    //                     `${b(
+                    //         checkboxes[a].nextSibling.nextSibling.innerText
+                    //       ).toLowerCase()}`
+                    //                 );
+                    //             }
+                    //         }
 
                     function updateStorage(a) {
                         (checkboxValues[a.id] = a.checked),
@@ -230,7 +230,7 @@ if (isset($_POST['submit2']))
                 </div>
                 <!-- <input class="progressss__reset" name="submit" type="reset" value="Submit" title="Reset Checkboxes"
                     tabindex="0" required /> -->
-                <button name="submit" class="button button1">Submit</button>
+                <button name="submit" class="button1">Submit</button>
 
                 <!-- <input type="submit" name="submit" value="submit" required> -->
             </form>
@@ -391,7 +391,7 @@ if (isset($_POST['submit2']))
                 };
                 </script>
                 <!-- <input type="submit" name="submit2" value="submit" required> -->
-                <button name="submit2" class="button button1">Submit</button>
+                <button name="submit2" class="button1">Submit</button>
 
             </form>
         </section>
