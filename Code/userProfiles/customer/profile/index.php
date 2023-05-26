@@ -1,5 +1,4 @@
 <?php 
-
 include '../../../Database/Config.php';
 $SuccessMessage="";
 $curr_email="";
@@ -10,7 +9,9 @@ if($_SESSION['email']){
 
     $curr_email =  $_SESSION['email'];
 }
-
+$sql = "SELECT * FROM customer WHERE email='$curr_email'";
+$result = mysqli_query($Conn, $sql);
+$row = mysqli_fetch_assoc($result);
 
 if(isset($_POST['submit'])){
 $Get_image_name = $_FILES['image']['name'];
@@ -34,12 +35,10 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
       unset($_SESSION['flash_message']);
   //echo "ERROR: Could not able to execute $sql. " . mysqli_error($Conn);
 }
+    echo '<script>window.reload()</script>';
 
 }
 }
-$sql = "Select * from customer where email='$curr_email'";
-$result=mysqli_query($Conn, $sql) ;
-$result2=mysqli_query($Conn, $sql) ;
 
 ?>
 
@@ -52,6 +51,7 @@ $result2=mysqli_query($Conn, $sql) ;
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+    
     </script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
@@ -74,7 +74,6 @@ $result2=mysqli_query($Conn, $sql) ;
                     <form method="POST" action="" enctype="multipart/form-data">
                         <input class="d-none" type="file" name="img" accept="image/*" />
                         <?php
-                             $row = mysqli_fetch_assoc($result);
                              if($row['picture']!=null)
                                  {
 
@@ -104,8 +103,6 @@ $result2=mysqli_query($Conn, $sql) ;
                         <div class="card-body">
                             <h4 class="card-title">Profile</h4>
                             <form id="form" action="" method="POST">
-                                <?php 
-           $row = mysqli_fetch_assoc($result2)?>
                                 <div id="errorPass" class="form-label"></div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
@@ -133,7 +130,7 @@ $result2=mysqli_query($Conn, $sql) ;
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Fine amount</label>
                                         <input type="number" class="form-control" name="amount" id="amount"
-                                            placeholder="Fine amount" disabled>
+                                            placeholder=<?php echo $row['fine_amount']?> disabled>
                                     </div>
                                 </div>
                             </form>
