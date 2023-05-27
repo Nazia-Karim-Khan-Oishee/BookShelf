@@ -35,6 +35,33 @@ if (isset($_POST['submit'])) {
         echo '<script>window.reload()</script>';
     }
 }
+
+if(isset($_POST['updateProfile'])){
+$Get_image_name = $_FILES['image']['name'];
+$image_Path = "../../../../images/".basename($Get_image_name);
+$sql = "Update deliveryman set picture='$Get_image_name' where email='$curr_email'";
+// $upload=mysqli_query($Conn, $sql);
+if(mysqli_query($Conn, $sql) ){
+move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
+
+  $_SESSION['flash_message']="profile picture uploaded successfully.";
+  if(isset($_SESSION['flash_message'])) {
+      $message = $_SESSION['flash_message'];
+      unset($_SESSION['flash_message']);
+      //echo $message;
+  }
+   //echo "Book added successfully.";
+} else{
+  $_SESSION['flash_message']="ERROR: Could not able to upload profile picture";
+  if(isset($_SESSION['flash_message'])) {
+      $message = $_SESSION['flash_message'];
+      unset($_SESSION['flash_message']);
+  //echo "ERROR: Could not able to execute $sql. " . mysqli_error($Conn);
+}
+    echo '<script>window.reload()</script>';
+
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +99,11 @@ if (isset($_POST['submit'])) {
                         <br>
                         <br>
                         <div class="input-group w-75">
-                            <input type="file" name="image" class="form-control profile" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image">
+                            <input type="file" name="image" class="form-control profile" id="inputGroupFile04"
+                                aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image">
                         </div>
-                        <input type="submit" name="submit" class="btn btn-dark mt-3" id="inputGroupFileAddon04" name="profileimg" value="Update Profile Picture" /><br>
+                        <input type="submit" name="updateProfile" class="btn btn-dark mt-3" id="inputGroupFileAddon04"
+                            name="profileimg" value="Update Profile Picture" /><br>
                         <span class="error"><?php echo $message; ?></span>
                     </form>
                 </div>
@@ -82,42 +111,49 @@ if (isset($_POST['submit'])) {
                     <div class="card profile-card">
                         <div class="card-body">
                             <h4 class="card-title">Profile</h4>
-                            <form id="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                            <form id="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"
+                                method="POST">
                                 <div id="errorPass" class="form-label"></div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo $row['name']; ?>" disabled>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="<?php echo $row['name']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="<?php echo $row['email']; ?>" disabled>
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="<?php echo $row['email']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Contact</label>
-                                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="<?php echo $row['contact_no']; ?>" disabled>
+                                        <input type="text" class="form-control" id="mobile" name="mobile"
+                                            placeholder="<?php echo $row['contact_no']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Area</label>
-                                        <input type="text" class="form-control" id="area" name="area" value="<?php echo $row['area']; ?>" required>
+                                        <input type="text" class="form-control" id="area" name="area"
+                                            value="<?php echo $row['area']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">District</label>
-                                        <input type="text" class="form-control" id="district" name="district" value="<?php echo $row['district']; ?>" required>
+                                        <input type="text" class="form-control" id="district" name="district"
+                                            value="<?php echo $row['district']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Division</label>
-                                        <input type="text" class="form-control" id="division" name="division" value="<?php echo $row['division']; ?>" required>
+                                        <input type="text" class="form-control" id="division" name="division"
+                                            value="<?php echo $row['division']; ?>" required>
                                     </div>
                                 </div>
 
