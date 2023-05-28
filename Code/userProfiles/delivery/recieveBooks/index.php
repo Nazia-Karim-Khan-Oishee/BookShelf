@@ -14,7 +14,7 @@ if ($_SESSION['email']) {
 <html>
 
 <head>
-    <title>Books to be recieved</title>
+    <title>Books to be received</title>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -43,7 +43,7 @@ if ($_SESSION['email']) {
                                 <th>Customer Name</th>
                                 <th>Customer Contact</th>
                                 <th>Customer Address</th>
-                                <th>Recieved</th>
+                                <th>Received</th>
                             </tr>
                         </thead>
                         <tbody>
