@@ -74,7 +74,6 @@ $result2 = mysqli_query($Conn, $sql2);
                 ?>
                             <tr>
                                 <td>
-                                    <!-- Book 1 -->
                                     <?php echo $row['BookName'];?>
                                 </td>
                                 <td>
@@ -86,12 +85,11 @@ $result2 = mysqli_query($Conn, $sql2);
 
                                 </td>
                                 <td>
-                                    <!-- 016969420 -->
                                     <?php echo $row['ContactNo'];?>
                                 </td>
                                 </td>
                                 <td>
-                                    <!-- Gorib jayga --> <?php echo $row['Area'];?>
+                                    <?php echo $row['Area'];?>
                                 </td>
 
                                 </td>
@@ -102,16 +100,7 @@ $result2 = mysqli_query($Conn, $sql2);
                             }
                         }
                             ?>
-                            <!-- <tr>
-                                <td>Book 2</td>
-                                <td>2</td>
-                                <td>Oishee</td>
-                                <td>0171717171</td>
-                                <td>Shobuj poth</td>
-                                <td><input type="checkbox" class="form-check-input" name="books[]" value="Book 1"></td>
-                            </tr> -->
 
-                            <!-- Add more rows as needed -->
                         </tbody>
                     </table>
                 </div>
