@@ -19,7 +19,7 @@ if (isset($_SESSION['email']))
       }
     else 
     {
-      header("Location: ../userProfiles/delivery/checklist.php");
+      header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
     }  
 
 }
