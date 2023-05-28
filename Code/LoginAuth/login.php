@@ -75,7 +75,7 @@ if (isset($_POST['submit']))
                         $_POST['password'] = "";
                         $_POST['email'] = "";
                         //unset($user_name);
-                        header("Location: ../userProfiles/delivery/checklist.php");
+                        header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
                         // echo"hello ". $row['email'];
     
                     }

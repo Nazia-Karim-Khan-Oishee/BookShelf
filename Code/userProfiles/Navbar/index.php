@@ -15,13 +15,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="http://localhost/BookShelf/Code/userProfiles/customer/Profile/index.php">Profile</a>
+                    <a class="nav-link" aria-current="page"
+                        href="http://localhost/BookShelf/Code/userProfiles/customer/Profile/index.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/customer/browsebooks/index.php">Browse Books</a>
+                    <a class="nav-link"
+                        href="http://localhost/BookShelf/Code/userProfiles/customer/browsebooks/index.php">Browse
+                        Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/customer/MyBookshelf/index.php">My BookShelf</a>
+                    <a class="nav-link"
+                        href="http://localhost/BookShelf/Code/userProfiles/customer/MyBookshelf/index.php">My
+                        BookShelf</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
@@ -29,7 +34,8 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php"
+                            class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -56,10 +62,14 @@
                     <a class="nav-link" aria-current="page" href="#">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/viewBooks/index.php">Book Management</a>
+                    <a class="nav-link"
+                        href="http://localhost/BookShelf/Code/userProfiles/admin/viewBooks/index.php">Book
+                        Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/loanManagement/index.php">Loan Details</a>
+                    <a class="nav-link"
+                        href="http://localhost/BookShelf/Code/userProfiles/admin/loanManagement/index.php">Loan
+                        Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Assign Deliveryman</a>
@@ -70,7 +80,8 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php"
+                            class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
@@ -93,13 +104,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page"
+                        href="http://localhost/BookShelf/Code/userProfiles/delivery/deliverymanProfile/index.php">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Delivery List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Receiving List</a>
+                </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item d-none d-lg-block">
-                    <button class="btn btn-secondary logout-button"><a href="../../LoginAuth/logout.php" class="logout-button">Log Out</a></button>
+                    <button class="btn btn-secondary logout-button"><a href="../../../LoginAuth/logout.php"
+                            class="logout-button">Log Out</a></button>
                 </li>
             </ul>
         </div>
