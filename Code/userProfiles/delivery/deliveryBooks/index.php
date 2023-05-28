@@ -8,6 +8,25 @@ session_start();
 if ($_SESSION['email']) {
     $curr_email = $_SESSION['email'];
 }
+$sql = "SELECT * FROM deliveryman where email='$curr_email'";
+$result = mysqli_query($Conn, $sql);
+if($result)
+{
+    $row = mysqli_fetch_assoc($result);
+
+    // Access the location_id column value and store it in a variable
+    $locationId = $row['location_id'];
+
+    // Use the locationId variable as needed
+}
+
+$sql2 = "SELECT book_location_delivery.delivery_id as DeliveryID,book_location_delivery.copy_id as CopyId,customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area FROM book_location_delivery,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_delivery.location_id='$locationId' and deliveryman.location_id='$locationId'
+ and book_location_delivery.ISBN=book.ISBN and book_location_delivery.email=customer.email
+ ";
+
+// Execute the query
+$result2 = mysqli_query($Conn, $sql2);
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +39,7 @@ if ($_SESSION['email']) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" />
-    
+
 </head>
 
 <body>
@@ -33,7 +52,7 @@ if ($_SESSION['email']) {
         <div class="content-container w-75 mx-auto">
             <h1>Delivery Information</h1>
 
-            <form action="process_delivery.php" method="POST">
+            <form action="" method="POST">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -47,23 +66,51 @@ if ($_SESSION['email']) {
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                // Check if there are any records
+                if (mysqli_num_rows($result2)) {
+                    while($row = mysqli_fetch_assoc($result2)) {
+                       
+                ?>
                             <tr>
-                                <td>Book 1</td>
-                                <td>1</td>
-                                <td>Arpa</td>
-                                <td>016969420</td>
-                                <td>Gorib jayga</td>
-                                <td><input type="checkbox" class="form-check-input" name="books[]" value="Book 1"></td>
+                                <td>
+                                    <!-- Book 1 -->
+                                    <?php echo $row['BookName'];?>
+                                </td>
+                                <td>
+                                    <?php echo $row['CopyId'];?>
+
+                                </td>
+                                <td>
+                                    <?php echo $row['CustomerName'];?></td>
+
+                                </td>
+                                <td>
+                                    <!-- 016969420 -->
+                                    <?php echo $row['ContactNo'];?>
+                                </td>
+                                </td>
+                                <td>
+                                    <!-- Gorib jayga --> <?php echo $row['Area'];?>
+                                </td>
+
+                                </td>
+                                <td><input type="checkbox" class="form-check-input" name="books[]"
+                                        value="<?php  $row['DeliveryID']?>"></td>
                             </tr>
-                            <tr>
+                            <?php 
+                            }
+                        }
+                            ?>
+                            <!-- <tr>
                                 <td>Book 2</td>
                                 <td>2</td>
                                 <td>Oishee</td>
                                 <td>0171717171</td>
                                 <td>Shobuj poth</td>
                                 <td><input type="checkbox" class="form-check-input" name="books[]" value="Book 1"></td>
-                            </tr>
-                            
+                            </tr> -->
+
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>

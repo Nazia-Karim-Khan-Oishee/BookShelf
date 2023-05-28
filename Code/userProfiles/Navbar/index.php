@@ -105,14 +105,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page"
-                        href="http://localhost/BookShelf/Code/userProfiles/delivery/deliverymanProfile/index.php">Profile</a>
+                    <a class="nav-link" aria-current="page" href="../deliverymanProfile/index.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/delivery/deliveryBooks/index.php">Delivery List</a>
+                    <a class="nav-link" href="../deliveryBooks/index.php">Delivery
+                        List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/delivery/recieveBooks/index.php"">Receiving List</a>
+                    <a class="nav-link" href="../recieveBooks/index.php">Receiving
+                        List</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
