@@ -72,7 +72,7 @@
                         Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Assign Deliveryman</a>
+                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/assignDeliveryman/index.php">Assign Deliveryman</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
