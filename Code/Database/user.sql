@@ -731,7 +731,7 @@ CREATE TABLE `deliveryman` (
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `district` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `division` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `location_id` decimal(10,10) DEFAULT NULL,
+  `location_id` decimal(10,0) DEFAULT NULL,
   `picture` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
