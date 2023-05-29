@@ -13,14 +13,18 @@ if (isset($_SESSION['email']))
     header("Location: ../userProfiles/admin/viewBooks/index.php");
 
     }
-    if( $_SESSION['role']==="Reader")
+    else if( $_SESSION['role']==="Reader")
     {
       header("Location: ../userProfiles/customer/browseBooks/index.php");
       }
-    else 
+    else if( $_SESSION['role']==="DeliveryMan")
     {
       header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
     }  
+    else
+    {
+        header("Location: ../LoginAuth/login.php");
+    }
 
 }
 

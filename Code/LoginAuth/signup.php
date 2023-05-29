@@ -14,7 +14,7 @@ if (isset($_SESSION['email']))
                     header("Location: ../userProfiles/customer/dashboard.php");
                 }
 else {
-                    header("Location: ../userProfiles/delivery/dashboard.php");
+                    header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
 
 }
       //   echo "hello customer";
@@ -131,7 +131,7 @@ if (isset($_POST['submit']))
                                 if($result && $result2 )
                                 {
     
-                                     header("Location: ../userProfiles/delivery/checklist.php");
+                                     header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
                                       unset($email);
                                     unset($password);
                                     unset($cpassword);
