@@ -1,0 +1,35 @@
+.product-image {
+    height: 400px;
+    width: 300px;
+    border: 1px black solid;
+    border-radius: 2%;
+    box-shadow: 0px 7px 7px 0px rgb(163, 163, 163);
+    margin: 5%;
+}
+
+.card-body {
+    text-align: end;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card {
+    margin: 5%;
+    border: 1px rgb(146, 144, 144) solid;
+    border-radius: 2%;
+    
+}
+.animated-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url('tick.gif'); /* Replace with your own animated tick icon */
+    background-size: cover;
+    animation: play 1s steps(29) forwards;
+}
+
+@keyframes play {
+    100% { background-position: -580px; }
+}
