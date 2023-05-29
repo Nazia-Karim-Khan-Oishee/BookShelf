@@ -168,19 +168,21 @@ if (isset($_GET['ISBN'])) {
             <div class="card mb-3" style="max-width: 768px;width:768px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/Bookshelf/images/<?php echo $book['image'] ?>" alt="<?php echo $book['name'] ?>"
+                        <!-- <img src="../../../BOOKSHELF/images/.<?php echo $book['image'] ?>" -->
+                        <img src="../../../../images/<?php echo $book['image'] ?> " alt="<?php echo $book['name'] ?>"
                             class="product-image">
                     </div>
                     <div class="col-md-8 d-flex">
                         <div class="card-body">
                             <div class="book-description m-5">
                                 <h2 class="product-title"><?php echo $book['name'] ?></h2>
-                             
+
                                 <h3 class="product-author"><?php echo $book['author'] ?></h3>
                                 <h5 class="product-publisher"><?php echo $book['publisher'] ?></h5>
                                 <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
-                                <button class="btn btn-primary " <?php echo $disabled ?> data-bs-toggle="modal"
+                                <button class="btn btn-primary " data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Borrow Book</button>
+                                <!-- <?php echo $disabled ?> -->
                             </div>
                         </div>
                     </div>
@@ -307,7 +309,8 @@ districtSelect.addEventListener("change", function() {
 </html>
 
 <?php
-    } else {
+    } 
+    else {
         // If there is no book with the specified ID in the database, show an error message
         echo "<p>Book not found</p>";
     }

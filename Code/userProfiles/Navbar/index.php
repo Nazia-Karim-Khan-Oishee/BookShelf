@@ -15,17 +15,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page"
-                        href="http://localhost/BookShelf/Code/userProfiles/customer/Profile/index.php">Profile</a>
+                    <a class="nav-link" aria-current="page" href="../Profile/index.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="http://localhost/BookShelf/Code/userProfiles/customer/browsebooks/index.php">Browse
+                    <a class="nav-link" href="../browsebooks/index.php">Browse
                         Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"
-                        href="http://localhost/BookShelf/Code/userProfiles/customer/MyBookshelf/index.php">My
+                    <a class="nav-link" href="../MyBookshelf/index.php">My
                         BookShelf</a>
                 </li>
                 <li class="nav-item d-lg-none">
