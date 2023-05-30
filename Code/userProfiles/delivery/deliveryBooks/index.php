@@ -18,7 +18,7 @@ if($result)
 }
 
 $sql2 = "SELECT book_location_delivery.delivery_id as DeliveryID,book_location_delivery.copy_id as CopyId,customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area FROM book_location_delivery,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_delivery.location_id='$locationId' and deliveryman.location_id='$locationId'
- and book_location_delivery.ISBN=book.ISBN and book_location_delivery.email=customer.email
+ and book_location_delivery.ISBN=book.ISBN and book_location_delivery.email=customer.email and book_location_delivery.delivery_date=CURDATE()
  ";
 // Execute the query
 $result2 = mysqli_query($Conn, $sql2);
