@@ -3,14 +3,16 @@ include '../../../Database/Config.php';
 session_start(); 
 if (!isset($_SESSION['email'])) {
     // User is not logged in, redirect to the login page
-    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    header('Location: ../../../LoginAuth/login.php');
     exit;
 }
 $sql = "SELECT name, contact_no, fine_amount, effective_date FROM customer WHERE fine_amount > 0 and effective_date < NOW()";
 $result = $Conn->query($sql);
 ?>
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
     <title>Fine Overview</title>
     <script defer src="script.js"></script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -19,6 +21,7 @@ $result = $Conn->query($sql);
     <script src="../../../js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet" />
 </head>
+
 <body>
     <?php
     require 'navbar.php';
@@ -38,7 +41,7 @@ $result = $Conn->query($sql);
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
@@ -56,4 +59,5 @@ $result = $Conn->query($sql);
         </table>
     </div>
 </body>
+
 </html>
