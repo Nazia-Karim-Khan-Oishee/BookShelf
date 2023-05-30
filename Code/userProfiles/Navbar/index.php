@@ -56,20 +56,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link"
-                        href="http://localhost/BookShelf/Code/userProfiles/admin/viewBooks/index.php">Book
+                        href="../viewBooks/index.php">Book
                         Management</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="http://localhost/BookShelf/Code/userProfiles/admin/loanManagement/index.php">Loan
-                        Details</a>
+                        href="../loanManagement/index.php">Fine Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/BookShelf/Code/userProfiles/admin/assignDeliveryman/index.php">Assign Deliveryman</a>
+                    <a class="nav-link" href="../assignDeliveryman/index.php">Assign Deliveryman</a>
                 </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link">Log Out</a>
