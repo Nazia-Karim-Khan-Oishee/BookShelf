@@ -19,17 +19,12 @@ if($result)
 
 }
 
-$sql2 = "SELECT book_location_retrieval.retrieval_id as DeliveryID,book_location_retrieval.copy_id as CopyId,customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area 
+$sql2 = "SELECT DISTINCT book_location_retrieval.retrieval_id as DeliveryID,book_location_retrieval.copy_id as CopyId,customer.fine_amount as FineAmount, customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area 
 FROM book_location_retrieval,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_retrieval.location_id='$locationId' and deliveryman.location_id='$locationId'
- and book_location_retrieval.ISBN=book.ISBN and book_location_retrieval.email=customer.email and book_location_retrieval.retrieval_date= CURDATE()
- ";
-// Execute the query
-$result2 = mysqli_query($Conn, $sql2);
-// if($result2)
-// {
-//                     echo "<script>alert('Selected retrievals deleted successfully.');</script>";
+ and book_location_retrieval.ISBN=book.ISBN and book_location_retrieval.email=customer.email and book_location_retrieval.retrieval_date<NOW()
+";
 
-// }
+$result2 = mysqli_query($Conn, $sql2);
 
 if (isset($_POST['submit'])) {
     if (!empty($_POST['books'])) {
@@ -53,11 +48,15 @@ if (isset($_POST['submit'])) {
             $copyIdsString = "'" . implode("','", $copyIds) . "'"; // Create a comma-separated string of quoted copy IDs
             $update_copy_id = "UPDATE all_copies_of_books SET borrowed = 0 WHERE copy_id IN ($copyIdsString)";
             $update = mysqli_query($Conn, $update_copy_id);
+            $sql = "update customer set fine_amount=0 where email in (select email from book_location_retrieval where retrieval_id IN ($deliveryIdsString))";
+            $result = mysqli_query($Conn, $sql);
             $del_delivery_id = "DELETE FROM book_location_retrieval WHERE retrieval_id IN ($deliveryIdsString)";
             $delete = mysqli_query($Conn, $del_delivery_id);
+            
 
             if ($delete) {
                 echo "<script>alert('Selected retrievals deleted successfully.');</script>";
+
                  header("Location: index.php");
 
             } else {
@@ -65,7 +64,19 @@ if (isset($_POST['submit'])) {
                 // echo "<script>alert('$deliveryIdsString');</script>";
             }
         }
+
     }
+            $sql2 = "select location_id FROM deliveryman where email='$curr_email' ";
+            $result2 = mysqli_query($Conn, $sql2);
+            $row = mysqli_fetch_assoc($result2);
+            $locationId = $row['location_id'];
+            $sql= "update customer set fine_amount= fine_amount+100, effective_date=NOW() where email in (select email from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW())";
+            $result = mysqli_query($Conn, $sql);
+            $sql="update customer_book set return_date= DATE_ADD(NOW(), INTERVAL 5 MINUTE) where email in (select email from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW())";
+            $result = mysqli_query($Conn, $sql);
+            $sql= "update book_location_retrieval set retrieval_date= DATE_ADD(NOW(), INTERVAL 5 MINUTE) where location_id='$locationId' and retrieval_date<NOW()";
+            $result = mysqli_query($Conn, $sql);
+            header("Location: index.php");
 }
 ?>
 
@@ -90,7 +101,7 @@ if (isset($_POST['submit'])) {
         ?>
 
         <div class="content-container w-75 mx-auto">
-            <h1>Delivery Information</h1>
+            <h1>Retrieval Information</h1>
 
             <form action="" method="POST">
                 <div class="table-responsive">
@@ -101,6 +112,7 @@ if (isset($_POST['submit'])) {
                                 <th>Copy ID</th>
                                 <th>Customer Name</th>
                                 <th>Customer Contact</th>
+                                <th>Fine Amount</th>
                                 <th>Customer Address</th>
                                 <th>Received</th>
                             </tr>
@@ -124,6 +136,9 @@ if (isset($_POST['submit'])) {
                                 </td>
                                 <td>
                                     <?php echo $row['ContactNo'];?>
+                                </td>
+                                <td>
+                                    <?php echo $row['FineAmount'];?>
                                 </td>
                                 <td>
                                     <?php echo $row['Area'];?>

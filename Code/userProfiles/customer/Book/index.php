@@ -28,7 +28,7 @@ if (isset($_GET['ISBN'])) {
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count = $row['count'];
-        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > CURDATE()";
+        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > NOW()";
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count2 = $row["count"];
@@ -45,14 +45,12 @@ if (isset($_GET['ISBN'])) {
             $division = $_POST['division'];
             $district = $_POST['district'];
             $area = $_POST['area'];
-            // $sql = "SELECT CURDATE() + 3 as delivery_date";
-            $sql = "SELECT DATE_ADD(CURDATE(), INTERVAL 3 DAY) as delivery_date";
+            $sql = "SELECT DATE_ADD(NOW(), INTERVAL 1 MINUTE) as delivery_date";
             $result = mysqli_query($Conn, $sql);
             $row = mysqli_fetch_assoc($result);
             // echo "<script>alert('$row[delivery_date]');</script>";
             $delivery_date = $row["delivery_date"];
-            // $sql = "SELECT CURDATE() + 7*$duration as return_date";
-            $sql = "SELECT DATE_ADD(CURDATE(), INTERVAL 7 * $duration DAY) as return_date";
+            $sql = "SELECT DATE_ADD(NOW(), INTERVAL 3 * $duration MINUTE) as return_date";
 
             $result = mysqli_query($Conn, $sql);
             $row = mysqli_fetch_assoc($result);

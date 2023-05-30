@@ -90,7 +90,7 @@ $result = mysqli_query($Conn, $sql);
                     <th>Author Name</th>
                     <th>Publisher Name</th>
                     <th>Quantity</th>
-                    <th>Add / Remove</th>
+                    <th>Add Quantity</th>
                 </tr>
             </thead>
             <tbody>
