@@ -64,8 +64,8 @@ $result = mysqli_query($Conn, $sql);
                 <tbody>
                     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
 
-<div class="modal fade" id="exampleModal<?php echo $row['email'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+                        <div class="modal fade" id="exampleModal<?php echo $row['email'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -110,7 +110,7 @@ $result = mysqli_query($Conn, $sql);
                             <td><?php echo $row['district']; ?></td>
                             <td><?php echo $row['division']; ?></td>
                             <td><button class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal<?php echo $row['email'] ?>">Assign Location</button></td>
+                    data-bs-target="#exampleModal<?php echo $row['email'] ?>">Assign Location</button></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -120,8 +120,9 @@ $result = mysqli_query($Conn, $sql);
 </body>
 <script>
 $(document).ready(function() {
-    $("#division").change(function() {
+    $(document).on("change", "#division", function() {
         var division = $(this).val();
+        var districtSelect = $(this).closest(".modal-content").find("#district");
         $.ajax({
             url: "fetch-districts.php",
             method: "POST",
@@ -130,23 +131,24 @@ $(document).ready(function() {
             },
             dataType: "text",
             success: function(data) {
-                $("#district").html(data);
-                var districtsString = data.substring(data.indexOf('["') + 2, data
-                    .lastIndexOf('"]'));
+                districtSelect.html(data);
+                var districtsString = data.substring(data.indexOf('["') + 2, data.lastIndexOf('"]'));
                 var districts = districtsString.split('","');
+                districtSelect.find('option').remove();
                 for (var i = 0; i < districts.length; i++) {
                     var option = document.createElement("option");
                     option.value = districts[i];
                     option.text = districts[i];
-                    districtSelect.appendChild(option);
+                    districtSelect.append(option);
                     console.log(districts[i]);
                 }
             }
         });
     });
 
-    $("#district").change(function() {
+    $(document).on("change", "#district", function() {
         var district = $(this).val();
+        var areaSelect = $(this).closest(".modal-content").find("#area");
         $.ajax({
             url: "fetch-areas.php",
             method: "POST",
@@ -155,80 +157,23 @@ $(document).ready(function() {
             },
             dataType: "text",
             success: function(data) {
-                $("#area").html(data);
-                var areasString = data.substring(data.indexOf('["') + 2, data.lastIndexOf(
-                    '"]'));
+                areaSelect.html(data);
+                var areasString = data.substring(data.indexOf('["') + 2, data.lastIndexOf('"]'));
                 var areas = areasString.split('","');
+                areaSelect.find('option').remove();
                 for (var i = 0; i < areas.length; i++) {
                     var option = document.createElement("option");
                     option.value = areas[i];
                     option.text = areas[i];
-                    areaSelect.appendChild(option);
+                    areaSelect.append(option);
                     console.log(areas[i]);
                 }
             }
         });
     });
 });
-
-var divisionSelect = document.getElementById("division");
-var districtSelect = document.getElementById("district");
-var areaSelect = document.getElementById("area");
-
-// Add an event listener to the division select element
-divisionSelect.addEventListener("change", function() {
-    // Clear the district and area select options
-    districtSelect.innerHTML = "<option value=''>Select District</option>";
-    areaSelect.innerHTML = "<option value=''>Select Area</option>";
-
-    // Get the selected division value
-    var selectedDivision = divisionSelect.value;
-
-
-    // Make an AJAX request to get the districts for the selected division
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "fetch-districts.php?division=" + selectedDivision);
-    xhr.onload = function() {
-        console.log(xhr.responseText);
-        // Parse the JSON response
-        var districts = JSON.parse(xhr.responseText);
-        // Add the district options to the district select element
-        for (var i = 0; i < districts.length; i++) {
-            var option = document.createElement("option");
-            option.value = districts[i];
-            option.text = districts[i];
-            districtSelect.appendChild(option);
-            console.log(districts[i]);
-        }
-    };
-    xhr.send();
-});
-
-// Add an event listener to the district select element
-districtSelect.addEventListener("change", function() {
-    // Clear the area select options
-    areaSelect.innerHTML = "<option value=''>Select Area</option>";
-
-    // Get the selected district value
-    var selectedDistrict = districtSelect.value;
-
-    // Make an AJAX request to get the areas for the selected district
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "fetch-areas.php?district=" + selectedDistrict);
-    xhr.onload = function() {
-        // Parse the JSON response
-        var areas = JSON.parse(xhr.responseText);
-
-        // Add the area options to the area select element
-        for (var i = 0; i < areas.length; i++) {
-            var option = document.createElement("option");
-            option.value = areas[i].id;
-            option.text = areas[i].name;
-            areaSelect.appendChild(option);
-        }
-    };
-    xhr.send();
-});
 </script>
+
+
 
 </html>

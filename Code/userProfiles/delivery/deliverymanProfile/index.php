@@ -15,17 +15,17 @@ $result = mysqli_query($Conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST['submit'])) {
-    $area = $_POST['area'];
-    $district = $_POST['district'];
-    $division = $_POST['division'];
+    $name = $_POST['name'];
+    $contact = $_POST['mobile'];
 
-    $sql = "UPDATE deliveryman SET area='$area', district='$district', division='$division' WHERE email='$curr_email'";
+    $sql = "UPDATE deliveryman SET name='$name', contact_no='$contact' WHERE email='$curr_email'";
     if (mysqli_query($Conn, $sql)) {
         $_SESSION['flash_message'] = "Profile updated successfully.";
         if (isset($_SESSION['flash_message'])) {
             $message = $_SESSION['flash_message'];
             unset($_SESSION['flash_message']);
         }
+    
     } else {
         $_SESSION['flash_message'] = "ERROR: Could not update profile.";
         if (isset($_SESSION['flash_message'])) {
@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
         }
         echo '<script>window.reload()</script>';
     }
+    
 }
 
 if(isset($_POST['updateProfile'])){
@@ -118,7 +119,7 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="<?php echo $row['name']; ?>" disabled>
+                                            value="<?php echo $row['name']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
@@ -132,28 +133,28 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Contact</label>
                                         <input type="text" class="form-control" id="mobile" name="mobile"
-                                            placeholder="<?php echo $row['contact_no']; ?>" disabled>
+                                            value="<?php echo $row['contact_no']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Area</label>
                                         <input type="text" class="form-control" id="area" name="area"
-                                            value="<?php echo $row['area']; ?>" required>
+                                            value="<?php echo $row['area']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">District</label>
                                         <input type="text" class="form-control" id="district" name="district"
-                                            value="<?php echo $row['district']; ?>" required>
+                                            value="<?php echo $row['district']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Division</label>
                                         <input type="text" class="form-control" id="division" name="division"
-                                            value="<?php echo $row['division']; ?>" required>
+                                            value="<?php echo $row['division']; ?>" disabled>
                                     </div>
                                 </div>
 
