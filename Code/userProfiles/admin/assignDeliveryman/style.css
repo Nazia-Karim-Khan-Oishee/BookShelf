@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #444444;
+}
 .product-image {
     height: 400px;
     width: 300px;
@@ -28,6 +34,9 @@
     background-image: url('tick.gif'); /* Replace with your own animated tick icon */
     background-size: cover;
     animation: play 1s steps(29) forwards;
+}
+.section-product-details{
+    margin-top: 6rem !important;
 }
 
 @keyframes play {
