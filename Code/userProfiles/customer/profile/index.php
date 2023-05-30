@@ -27,6 +27,8 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
       unset($_SESSION['flash_message']);
       //echo $message;
   }
+                                   header("Location: index.php");
+
    //echo "Book added successfully.";
 } else{
   $_SESSION['flash_message']="ERROR: Could not able to upload profile picture";
@@ -51,7 +53,6 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-    
     </script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
