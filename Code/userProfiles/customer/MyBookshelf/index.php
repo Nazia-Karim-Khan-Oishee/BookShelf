@@ -7,9 +7,9 @@ if (!isset($_SESSION['email'])) {
 }
 include '../../../Database/Config.php';
 $email = $_SESSION['email'];
-$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date <= curdate()";
+$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.ISBN=book.ISBN and customer_book.return_date <= CURDATE()";
 $previouslyBorrowedBooks = mysqli_query($Conn, $sql);
-$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date > curdate() limit 1";
+$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.ISBN=book.ISBN and customer_book.return_date > CURDATE() limit 1";
 $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
 $sql = "SELECT delivery_date From book_location_delivery,customer_book where book_location_delivery.email='$email' and return_date > curdate() limit 1";
 $deliveryDate = mysqli_query($Conn, $sql);
