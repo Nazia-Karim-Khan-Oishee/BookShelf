@@ -3,7 +3,7 @@ include '../../../Database/Config.php';
 session_start(); 
 if (!isset($_SESSION['email'])) {
     // User is not logged in, redirect to the login page
-    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    header('Location: ../../../LoginAuth/login.php');
     exit;
 }
 
@@ -15,6 +15,7 @@ $result = mysqli_query($Conn, $sql);
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Browse Books</title>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -24,17 +25,19 @@ $result = mysqli_query($Conn, $sql);
     <link href="style.css" rel="stylesheet" />
     <script defer src="script.js"></script>
     <style>
-        .fade-in-book {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-        }
-        .fade-in-book.fade-in {
-            opacity: 1;
-            transform: translateX(0);
-        }
+    .fade-in-book {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+
+    .fade-in-book.fade-in {
+        opacity: 1;
+        transform: translateX(0);
+    }
     </style>
 </head>
+
 <body>
     <?php
     require 'navbar.php';
@@ -45,7 +48,7 @@ $result = mysqli_query($Conn, $sql);
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-                       
+
                         <h2>Available Books</h2>
                     </div>
                 </div>
@@ -58,10 +61,13 @@ $result = mysqli_query($Conn, $sql);
                     while($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div id="product-1" class="single-product fade-in-book" >
-                        <div class="part-1" style="background-image: url('../../../../images/<?php echo $row['image']; ?>');">
+                    <div id="product-1" class="single-product fade-in-book">
+                        <div class="part-1"
+                            style="background-image: url('../../../../images/<?php echo $row['image']; ?>');">
                             <ul>
-                            <li><a href="../Book/index.php?ISBN=<?php echo $row['ISBN'] ?>"><i class='bx bx-cart-add bx-md' style="background-color: transparent;"></i></a></li>
+                                <li><a href="../Book/index.php?ISBN=<?php echo $row['ISBN'] ?>"><i
+                                            class='bx bx-cart-add bx-md' style="background-color: transparent;"></i></a>
+                                </li>
 
                             </ul>
                         </div>
@@ -84,4 +90,5 @@ $result = mysqli_query($Conn, $sql);
         </div>
     </section>
 </body>
+
 </html>

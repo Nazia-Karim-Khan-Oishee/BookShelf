@@ -1595,7 +1595,7 @@ ALTER TABLE `customer`
 -- Indexes for table `customer_book`
 --
 ALTER TABLE `customer_book`
-  ADD PRIMARY KEY (`email`,`ISBN`,`copy_id`),
+  ADD PRIMARY KEY (`email`,`ISBN`,`copy_id`, `issue_date`),
   ADD KEY `fk_customer_book1` (`ISBN`),
   ADD KEY `fk_customer_book2` (`copy_id`);
 
