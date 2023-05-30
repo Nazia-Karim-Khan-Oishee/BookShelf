@@ -107,8 +107,8 @@ mysqli_close($Conn);
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Upload Photo</label>
                         <input class="form-control" type="file" name="image" id="file">
+                        <label for="formFile" class="form-label">Upload Photo</label>
                     </div>
                     <button type="submit" name="submit" class="btn btn-dark">Add Book</button><br>
                     <span class="error"> <?php echo $SuccessMessage;?></span>
