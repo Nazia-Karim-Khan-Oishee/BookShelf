@@ -52,9 +52,11 @@ if (isset($_POST['submit'])) {
 
             if ($delete) {
                 echo "<script>alert('Selected deliveries deleted successfully.');</script>";
+                                 header("Location: index.php");
+
             } else {
                 echo "<script>alert('Failed to delete selected deliveries.');</script>";
-                echo "<script>alert('$deliveryIdsString');</script>";
+                // echo "<script>alert('$deliveryIdsString');</script>";
             }
         }
     }

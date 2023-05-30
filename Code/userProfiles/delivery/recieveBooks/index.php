@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
 
             } else {
                 echo "<script>alert('Failed to delete selected retrievals.');</script>";
-                echo "<script>alert('$deliveryIdsString');</script>";
+                // echo "<script>alert('$deliveryIdsString');</script>";
             }
         }
     }
