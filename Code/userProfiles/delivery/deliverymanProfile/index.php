@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         }
         echo '<script>window.reload()</script>';
     }
-    
+    header("Location: index.php");
 }
 
 if(isset($_POST['updateProfile'])){
@@ -62,6 +62,7 @@ move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
     echo '<script>window.reload()</script>';
 
 }
+header("Location: index.php");
 }
 ?>
 
