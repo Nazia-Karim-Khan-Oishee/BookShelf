@@ -8,14 +8,14 @@ session_start();
 
 if (isset($_SESSION['email'])) 
 {
-    if($_SESSION['email']==="admin@gmail.com")
+    if($_SESSION['role']==="admin")
     {
     header("Location: ../userProfiles/admin/viewBooks/index.php");
 
     }
     else if( $_SESSION['role']==="Reader")
     {
-      header("Location: ../userProfiles/customer/browseBooks/index.php");
+      header("Location: ../userProfiles/customer/profile/index.php");
       }
     else if( $_SESSION['role']==="DeliveryMan")
     {
@@ -32,13 +32,13 @@ if (isset($_POST['submit']))
 {
 	$email = $_POST['email'];
             $password = ($_POST['password']);
-    if($email === 'admin@gmail.com' && $password === 'admin')
-    {
-        $_SESSION['email'] = 'admin@gmail.com';
-        header("Location: ../userProfiles/admin/viewBooks/index.php");
+    // if($email === 'admin@gmail.com' && $password === 'admin')
+    // {
+    //     $_SESSION['email'] = 'admin@gmail.com';
+    //     header("Location: ../userProfiles/admin/viewBooks/index.php");
         
-    }
-    else {
+    // }
+    // else {
         
         $password = md5($_POST['password']);
         //$cpassword = md5($_POST['cpassword']);
@@ -69,19 +69,33 @@ if (isset($_POST['submit']))
                         // echo"hello ". $row['email'];
     
                     }
-                 else
+                 elseif($_SESSION['role']==="DeliveryMan")
                     {
                          $sql_deliveryman = "SELECT * FROM deliveryman WHERE email='$email'";// AND password='$password'";
                         $result_deliveryman = mysqli_query($Conn, $sql_deliveryman);
                         $res = mysqli_fetch_assoc($result_deliveryman);
                         $_SESSION['user_name'] = $res['name'];
-                        echo $_SESSION['user_name'];
+                        // echo $_SESSION['user_name'];
                         $_POST['password'] = "";
                         $_POST['email'] = "";
                         //unset($user_name);
                         header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
                         // echo"hello ". $row['email'];
     
+                    }
+                    else{
+                     $sql_admin = "SELECT * FROM users WHERE email='$email'";// AND password='$password'";
+                        $result_admin = mysqli_query($Conn, $sql_admin);
+                        $res_admin = mysqli_fetch_assoc($result_admin);
+                        $_SESSION['email'] = $res_admin['email'];
+                       // echo $_SESSION['user_name'];
+    
+                        $_POST['password'] = "";
+                        $_POST['email'] = "";
+                        //unset($user_name);
+                        // echo"hello ". $row['email'];
+                        header("Location: ../userProfiles/admin/viewBooks/index.php");
+
                     }
         
                 }
@@ -102,7 +116,7 @@ if (isset($_POST['submit']))
             unset($user_name);
             // echo "<p class='er'>Wrong Password.</big></p>";
         }
-    }
+    // }
 }
 ?>
 
