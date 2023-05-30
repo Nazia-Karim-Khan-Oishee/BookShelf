@@ -11,7 +11,7 @@ if (isset($_SESSION['email']))
     if( $_SESSION['role']==="Reader")
                 {
                     
-                    header("Location: ../userProfiles/customer/dashboard.php");
+                    header("Location: ../userProfiles/customer/profile/index.php");
                 }
 else {
                     header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
@@ -89,7 +89,7 @@ if (isset($_POST['submit']))
                                 if($result && $result2 )
                                 {
     
-                                     header("Location: ../userProfiles/customer/browseBooks/index.php");
+                                     header("Location: ../userProfiles/customer/profile/index.php");
                                       unset($email);
                                     unset($password);
                                     unset($cpassword);
@@ -214,7 +214,8 @@ if (isset($_POST['submit']))
                     else 
                     {
                           $emailErr="Invalid Email";
-                           
+                                           echo "<script>alert('Selected deliveries deleted successfully.');</script>";
+
                                      unset($email);
                                 unset($password);
                                 unset($cpassword);
