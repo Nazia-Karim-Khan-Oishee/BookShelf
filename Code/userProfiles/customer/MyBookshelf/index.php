@@ -7,10 +7,12 @@ if (!isset($_SESSION['email'])) {
 }
 include '../../../Database/Config.php';
 $email = $_SESSION['email'];
-$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date <= sysdate()";
+$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date <= curdate()";
 $previouslyBorrowedBooks = mysqli_query($Conn, $sql);
-$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date > sysdate() limit 1";
+$sql = "SELECT * FROM customer_book,book WHERE customer_book.email='$email' and customer_book.return_date > curdate() limit 1";
 $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
+$sql = "SELECT delivery_date From book_location_delivery,customer_book where book_location_delivery.email='$email' and return_date > curdate() limit 1";
+$deliveryDate = mysqli_query($Conn, $sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +35,7 @@ $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
     <div class="container">
         <div class="mt-5">
             <h1>Currently Borrowed Book</h1>
-            <div class="card mb-3 " style="width:576px">
+            <div class="card mb-3 " style="width:600px">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="<?php
@@ -51,9 +53,10 @@ $currentlyBorrowedBooks = mysqli_query($Conn, $sql);
                                 <?php
 
                                 if ($currentlyBorrowedBooksresult) {
-
+                                    $deliveryDateResult = mysqli_fetch_assoc($deliveryDate);
                                     echo "<h2 class='product-title'>" . $currentlyBorrowedBooksresult['name'] . "</h2>";
                                     echo "<h3 class='product-author'>" . $currentlyBorrowedBooksresult['author'] . "</h3>";
+                                    echo "<h5 class='product-publisher'>" . "Delivery date: " . date('d-m-Y', strtotime($deliveryDateResult['delivery_date'])) . "</h5>";
                                     echo "<h5 class='product-publisher'>" . "Return date: " . date('d-m-Y', strtotime($currentlyBorrowedBooksresult['return_date'])) . "</h5>";
 
                                 } else {
