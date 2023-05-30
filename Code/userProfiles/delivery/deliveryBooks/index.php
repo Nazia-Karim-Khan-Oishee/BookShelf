@@ -13,19 +13,55 @@ $result = mysqli_query($Conn, $sql);
 if($result)
 {
     $row = mysqli_fetch_assoc($result);
-
     // Access the location_id column value and store it in a variable
     $locationId = $row['location_id'];
-
-    // Use the locationId variable as needed
 }
 
 $sql2 = "SELECT book_location_delivery.delivery_id as DeliveryID,book_location_delivery.copy_id as CopyId,customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area FROM book_location_delivery,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_delivery.location_id='$locationId' and deliveryman.location_id='$locationId'
- and book_location_delivery.ISBN=book.ISBN and book_location_delivery.email=customer.email
+ and book_location_delivery.ISBN=book.ISBN and book_location_delivery.email=customer.email and book_location_delivery.delivery_date=CURDATE()
  ";
-
 // Execute the query
 $result2 = mysqli_query($Conn, $sql2);
+
+
+
+
+if (isset($_POST['submit'])) {
+    if (!empty($_POST['books'])) {
+        $deliveryIds = $_POST['books'];
+        $deliveryIds = array_map(function($id) use ($Conn) {
+            return mysqli_real_escape_string($Conn, $id);
+        }, $deliveryIds); // Sanitize the delivery IDs
+
+        $deliveryIdsString = "'" . implode("','", $deliveryIds) . "'"; // Create a comma-separated string of quoted delivery IDs
+
+        $find_delivery_ids = "SELECT copy_id FROM book_location_delivery WHERE delivery_id IN ($deliveryIdsString)";
+        $result3 = mysqli_query($Conn, $find_delivery_ids);
+
+        if ($result3) {
+            $copyIds = array();
+
+            while ($row_result = mysqli_fetch_assoc($result3)) {
+                $copyIds[] = $row_result['copy_id'];
+            }
+
+            $copyIdsString = "'" . implode("','", $copyIds) . "'"; // Create a comma-separated string of quoted copy IDs
+
+            $del_delivery_id = "DELETE FROM book_location_delivery WHERE delivery_id IN ($deliveryIdsString)";
+            $delete = mysqli_query($Conn, $del_delivery_id);
+
+            if ($delete) {
+                echo "<script>alert('Selected deliveries deleted successfully.');</script>";
+                                 header("Location: index.php");
+
+            } else {
+                echo "<script>alert('Failed to delete selected deliveries.');</script>";
+                // echo "<script>alert('$deliveryIdsString');</script>";
+            }
+        }
+    }
+}
+
 
 ?>
 
@@ -94,7 +130,7 @@ $result2 = mysqli_query($Conn, $sql2);
 
                                 </td>
                                 <td><input type="checkbox" class="form-check-input" name="books[]"
-                                        value="<?php  $row['DeliveryID']?>"></td>
+                                        value="<?php echo $row['DeliveryID']; ?>"></td>
                             </tr>
                             <?php 
                             }
@@ -105,7 +141,7 @@ $result2 = mysqli_query($Conn, $sql2);
                     </table>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

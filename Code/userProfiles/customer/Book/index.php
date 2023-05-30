@@ -5,7 +5,7 @@ include '../../../Database/Config.php';
 session_start(); 
 if (!isset($_SESSION['email'])) {
     // User is not logged in, redirect to the login page
-    header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
+    header('Location: ../../../LoginAuth/login.php');
     exit;
 }
 if (isset($_GET['ISBN'])) {
@@ -28,7 +28,7 @@ if (isset($_GET['ISBN'])) {
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count = $row['count'];
-        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > sysdate()";
+        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > CURDATE()";
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count2 = $row["count"];
@@ -45,13 +45,18 @@ if (isset($_GET['ISBN'])) {
             $division = $_POST['division'];
             $district = $_POST['district'];
             $area = $_POST['area'];
-            $sql = "SELECT CURRENT_DATE() + 3 as delivery_date";
+            // $sql = "SELECT CURDATE() + 3 as delivery_date";
+            $sql = "SELECT DATE_ADD(CURDATE(), INTERVAL 3 DAY) as delivery_date";
             $result = mysqli_query($Conn, $sql);
             $row = mysqli_fetch_assoc($result);
+            // echo "<script>alert('$row[delivery_date]');</script>";
             $delivery_date = $row["delivery_date"];
-            $sql = "SELECT CURRENT_DATE() + 7*$duration as return_date";
+            // $sql = "SELECT CURDATE() + 7*$duration as return_date";
+            $sql = "SELECT DATE_ADD(CURDATE(), INTERVAL 7 * $duration DAY) as return_date";
+
             $result = mysqli_query($Conn, $sql);
             $row = mysqli_fetch_assoc($result);
+
             $return_date = $row["return_date"];
             $sql = "SELECT LOCATION_ID FROM location WHERE division='$division' AND district='$district' AND area='$area' LIMIT 1";
             $result = mysqli_query($Conn, $sql);
@@ -168,19 +173,19 @@ if (isset($_GET['ISBN'])) {
             <div class="card mb-3" style="max-width: 768px;width:768px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/Bookshelf/images/<?php echo $book['image'] ?>" alt="<?php echo $book['name'] ?>"
+                        <img src="../../../../images/<?php echo $book['image'] ?> " alt="<?php echo $book['name'] ?>"
                             class="product-image">
                     </div>
                     <div class="col-md-8 d-flex">
                         <div class="card-body">
                             <div class="book-description m-5">
                                 <h2 class="product-title"><?php echo $book['name'] ?></h2>
-                             
+
                                 <h3 class="product-author"><?php echo $book['author'] ?></h3>
                                 <h5 class="product-publisher"><?php echo $book['publisher'] ?></h5>
                                 <input type="hidden" name="book_id" value="<?php echo $book['ISBN'] ?>">
-                                <button class="btn btn-primary " <?php echo $disabled ?> data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">Borrow Book</button>
+                                <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    <?php echo $disabled ?>>Borrow Book</button>
                             </div>
                         </div>
                     </div>
@@ -307,7 +312,8 @@ districtSelect.addEventListener("change", function() {
 </html>
 
 <?php
-    } else {
+    } 
+    else {
         // If there is no book with the specified ID in the database, show an error message
         echo "<p>Book not found</p>";
     }
