@@ -92,6 +92,7 @@ if (isset($_GET['ISBN'])) {
             } else {
                 echo '<script>alert("Order Failed")</script>';
             }
+            header("Location: ../MyBookshelf/index.php");
         }
 
 
