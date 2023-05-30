@@ -6,12 +6,12 @@ if (!isset($_SESSION['email'])) {
     header('Location: http://localhost/BookShelf/Code/LoginAuth/login.php');
     exit;
 }
-$sql = "SELECT name, contact_no, fine_amount, effective_date FROM customer WHERE fine_amount > 0 and effective_date < SYSDATE()";
+$sql = "SELECT name, contact_no, fine_amount, effective_date FROM customer WHERE fine_amount > 0 and effective_date < NOW()";
 $result = $Conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html><head>
-    <title>Loan Information</title>
+    <title>Fine Overview</title>
     <script defer src="script.js"></script>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
@@ -26,7 +26,7 @@ $result = $Conn->query($sql);
     ?>
     <div class="container">
         <div class="d-flex justify-content-between mt-4">
-            <h1>Loan Information</h1>
+            <h1>Fine Overview</h1>
         </div>
         <table id="book-table" class="table table-striped">
             <thead>
