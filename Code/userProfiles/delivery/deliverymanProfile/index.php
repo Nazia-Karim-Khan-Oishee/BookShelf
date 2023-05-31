@@ -24,10 +24,11 @@ $sql = "SELECT * FROM deliveryman WHERE email='$curr_email'";
 // and location.location_id=deliveryman.location_id";
 $result = mysqli_query($Conn, $sql);
 $row = mysqli_fetch_assoc($result);
-if($row[location_id])
+
+if($row['location_id'])
 {
     // and location.location_id=deliveryman.location_id";
-$sqlo = "SELECT * FROM location.location_id=deliveryman.location_id";
+$sqlo = "SELECT * FROM deliveryman, location where location.location_id=deliveryman.location_id";
 $resulto = mysqli_query($Conn, $sqlo);
 $rowo = mysqli_fetch_assoc($resulto);
 $area=$rowo['area'];
