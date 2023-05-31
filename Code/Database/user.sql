@@ -1221,7 +1221,7 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`ISBN`, `name`, `author`, `edition`, `publisher`, `image`) VALUES
-(' 978817215355', 'Byomkesh Shomogro', 'Sharadindu Bandyopadhyay', '5', 'আনন্দ পাবলিশার্স', 'byomkesh.jpg'),
+('978817215355', 'Byomkesh Shomogro', 'Sharadindu Bandyopadhyay', '5', 'আনন্দ পাবলিশার্স', 'byomkesh.jpg'),
 ('1100122', 'feluda', 'Satyajit Ray\n', '3', 'Ananda Publishers Pvt. Ltd.', 'feluda.jpg'),
 ('9780143029267', 'Devdas', 'Saratchandra Chattopadhyay', '1', 'Penguin Books India', 'devdas.jpg'),
 ('9780143066477', 'Srikanta', 'Sarat Chandra Chattopadhyay', '5', 'Penguin Books India', 'Srikant.jpg'),
