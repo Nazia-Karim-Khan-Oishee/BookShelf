@@ -21,11 +21,14 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
 
     // Update the deliveryman's location in the database
-    $updateSql = "UPDATE deliveryman SET location_id='$location_id', division='$division', district='$district' , area='$area'  WHERE email='$email'";
+    $updateSql = "UPDATE deliveryman SET location_id='$location_id' WHERE email='$email'";
     mysqli_query($Conn, $updateSql);
 }
 // Fetch all deliverymen from the database
-$sql = "SELECT * FROM deliveryman, location WHERE deliveryman.location_id=location.LOCATION_ID";
+$sql="SELECT * 
+FROM deliveryman
+LEFT OUTER JOIN location ON deliveryman.location_id = location.location_id";
+
 $result = mysqli_query($Conn, $sql);
 ?>
 
