@@ -8,14 +8,9 @@ session_start();
 if ($_SESSION['email']) {
     $curr_email = $_SESSION['email'];
 }
-
-// $sqlo = "SELECT * FROM deliveryman where email='$curr_email'";
-// $resulto = mysqli_query($Conn, $sql);
-// $rowo = mysqli_fetch_assoc($result);
-// if(!$rowo[location_id])
-// {
-
-// }
+else{
+    header('Location: ../../../LoginAuth/login.php');
+}
 $area="Not assigned";
 $district="Not assigned";
 $division="Not assigned";
