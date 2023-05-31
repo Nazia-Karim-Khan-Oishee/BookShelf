@@ -50,7 +50,7 @@ if (isset($_GET['ISBN'])) {
             $row = mysqli_fetch_assoc($result);
             // echo "<script>alert('$row[delivery_date]');</script>";
             $delivery_date = $row["delivery_date"];
-            $sql = "SELECT DATE_ADD(NOW(), INTERVAL 3 * $duration MINUTE) as return_date";
+            $sql = "SELECT DATE_ADD(NOW(), INTERVAL 2 * $duration MINUTE) as return_date";
 
             $result = mysqli_query($Conn, $sql);
             $row = mysqli_fetch_assoc($result);
@@ -124,7 +124,7 @@ if (isset($_GET['ISBN'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delivery Information</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

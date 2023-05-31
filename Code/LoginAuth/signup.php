@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include '../Database/Config.php';
 
@@ -6,200 +6,76 @@ error_reporting(0);
 
 session_start();
 
-if (isset($_SESSION['email'])) 
-{
-    if( $_SESSION['role']==="Reader")
-                {
-                    
-                    header("Location: ../userProfiles/customer/profile/index.php");
-                }
-else {
-                    header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
+if (isset($_SESSION['email'])) {
+    if ($_SESSION['role'] === "Reader") {
 
-}
-      //   echo "hello customer";
+        header("Location: ../userProfiles/customer/profile/index.php");
+    } else {
+        header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
+    }
+    //   echo "hello customer";
 
 }
 
-if (isset($_POST['submit'])) 
-{
-    
+if (isset($_POST['submit'])) {
+
     $email = $_POST["email"];
     $contact_no = $_POST["contact_no"];
-	$Just_Set = false;
+    $Just_Set = false;
     $Validate = true;
     $role = $_POST['Field'];
     $user_name = $_POST['user_name'];
-	 $_SESSION['email'] = $email;
-      $_SESSION['role'] = $role;
-        $_SESSION['user_name'] = $user_name;
-	$checkpassword = ($_POST['password']);
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = $role;
+    $_SESSION['user_name'] = $user_name;
+    $checkpassword = ($_POST['password']);
     $password = md5($_POST['password']);
     $cpassword = md5($_POST['cpassword']);
     $uppercase = preg_match('@[A-Z]@', $checkpassword);
     $lowercase = preg_match('@[a-z]@', $checkpassword);
     $number    = preg_match('@[0-9]@', $checkpassword);
     $specialchars = preg_match('@[^\w]@', $checkpassword);
-    
-    if(!$uppercase || !$lowercase || !$number || !$specialchars || strlen($checkpassword)<5 ) 
-    {
-        $Validate= false;
+
+    if (!$uppercase || !$lowercase || !$number || !$specialchars || strlen($checkpassword) < 5) {
+        $Validate = false;
     }
-    
+
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if(strlen($contact_no)==11)
-        {
-               if($Validate)
-            {        
-                if ($password === $cpassword) 
-                {
-                    
-                    
+        if (strlen($contact_no) == 11) {
+            if ($Validate) {
+                if ($password === $cpassword) {
+
+
                     $check_query = mysqli_query($Conn, "SELECT * FROM users where email ='$email'");
                     $rowCount = mysqli_num_rows($check_query);
-                    if($rowCount > 0)
-                    {
+                    if ($rowCount > 0) {
                         $emailErr = "User with email already exists!";
                         unset($email);
-                    unset($password);
-                    unset($cpassword);
-                    unset($user_name);
-                     unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                     $_POST['user_name'] = "";
-                    $_POST['email'] = "";
-                    $_POST['password'] = "";
-                    $_POST['cpassword'] = ""; 
-                }
-                
-                else
-                {
-                    $password=password_hash($password,PASSWORD_BCRYPT);
-                    if($role ==="Reader")
-                    {
-                               
-                              $sql = "INSERT INTO users (email, password, role) 
+                        unset($password);
+                        unset($cpassword);
+                        unset($user_name);
+                        unset($contact_no);
+                        $_POST['contact_no'] = "";
+                        $_POST['user_name'] = "";
+                        $_POST['email'] = "";
+                        $_POST['password'] = "";
+                        $_POST['cpassword'] = "";
+                    } else {
+                        $password = password_hash($password, PASSWORD_BCRYPT);
+                        if ($role === "Reader") {
+
+                            $sql = "INSERT INTO users (email, password, role) 
                                          VALUES ('$email', '$password', '$role')";
-    
-                                $result = mysqli_query($Conn, $sql);
-                                $sql_customer = "INSERT INTO customer (email, name, contact_no, fine_amount) 
+
+                            $result = mysqli_query($Conn, $sql);
+                            $sql_customer = "INSERT INTO customer (email, name, contact_no, fine_amount) 
                                          VALUES ('$email', '$user_name', '$contact_no', 0)";
-                                         $result2 = mysqli_query($Conn, $sql_customer);
-    
-                                if($result && $result2 )
-                                {
-    
-                                     header("Location: ../userProfiles/customer/profile/index.php");
-                                      unset($email);
-                                    unset($password);
-                                    unset($cpassword);
-                                    unset($user_name);
-                                     unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                                    $_POST['email'] = "";
-                                    $_POST['password'] = "";
-                                    $_POST['cpassword'] = "";
-                                    $_POST['user_name'] = "";
-                                 
-                                }
-                                else 
-                                {
-                                     echo"something went wrong";
-                                      unset($email);
-                                    unset($password);
-                                    unset($cpassword);
-                                    unset($user_name);
-                                     unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                                    $_POST['email'] = "";
-                                    $_POST['password'] = "";
-                                    $_POST['cpassword'] = "";
-                                    $_POST['user_name'] = "";
-    
-                                }
-                              }
-                              else {
-                                
-                              $sql = "INSERT INTO users (email, password, role) 
-                                         VALUES ('$email', '$password', '$role')";
-    
-                                $result = mysqli_query($Conn, $sql);
-                                $sql_deliveryman = "INSERT INTO deliveryman (email, name, contact_no) 
-                                         VALUES ('$email', '$user_name', '$contact_no')";
-                                         $result2 = mysqli_query($Conn, $sql_deliveryman);
-    
-                                if($result && $result2 )
-                                {
-    
-                                     header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
-                                      unset($email);
-                                    unset($password);
-                                    unset($cpassword);
-                                    unset($user_name);
-                                     unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                                    $_POST['email'] = "";
-                                    $_POST['password'] = "";
-                                    $_POST['cpassword'] = "";
-                                    $_POST['user_name'] = "";
-                                 
-                                }
-                                else 
-                                {
-                                     echo"something went wrong";
-                                      unset($email);
-                                    unset($password);
-                                    unset($cpassword);
-                                    unset($user_name);
-                                     unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                                    $_POST['email'] = "";
-                                    $_POST['password'] = "";
-                                    $_POST['cpassword'] = "";
-                                    $_POST['user_name'] = "";
-    
-                                }
-                              }
-                             
-                        }
-                    }
-                                else 
-                                {
-                                    $ConfirmErr="Password doesn't match";
-                                   
-                                    unset($email);
-                                    unset($password);
-                                    unset($cpassword);
-                                    unset($user_name);
-                                    unset($contact_no);
-                                   $_POST['contact_no'] = "";
-                                    $_POST['email'] = "";
-                                    $_POST['password'] = "";
-                                    $_POST['cpassword'] = "";
-                                    $_POST['user_name'] = "";
-    
-                                }
-                             
-        }
-        else 
-        {   
-            $PassErr="Password should contain at least one uppercase letter, one lowercase letter, one special character and one number";
-            unset($email);
-                unset($password);
-                unset($cpassword);
-                unset($user_name);   
-                unset($contact_no);
-                $_POST['contact_no'] = "";
-                $_POST['email'] = "";
-                $_POST['password'] = "";
-                $_POST['cpassword'] = "";
-                $_POST['user_name'] = "";
-        }
-        }
-        else {
-                       $contactErr="Contact no must be 11 digits long";
-                           
-                                     unset($email);
+                            $result2 = mysqli_query($Conn, $sql_customer);
+
+                            if ($result && $result2) {
+
+                                header("Location: ../userProfiles/customer/profile/index.php");
+                                unset($email);
                                 unset($password);
                                 unset($cpassword);
                                 unset($user_name);
@@ -209,28 +85,117 @@ if (isset($_POST['submit']))
                                 $_POST['password'] = "";
                                 $_POST['cpassword'] = "";
                                 $_POST['user_name'] = "";
-        }
-    }
-                    else 
-                    {
-                          $emailErr="Invalid Email";
-                                           echo "<script>alert('Selected deliveries deleted successfully.');</script>";
-
-                                     unset($email);
+                            } else {
+                                echo "something went wrong";
+                                unset($email);
                                 unset($password);
                                 unset($cpassword);
                                 unset($user_name);
-                                 unset($contact_no);
+                                unset($contact_no);
                                 $_POST['contact_no'] = "";
                                 $_POST['email'] = "";
                                 $_POST['password'] = "";
                                 $_POST['cpassword'] = "";
                                 $_POST['user_name'] = "";
+                            }
+                        } else {
+
+                            $sql = "INSERT INTO users (email, password, role) 
+                                         VALUES ('$email', '$password', '$role')";
+
+                            $result = mysqli_query($Conn, $sql);
+                            $sql_deliveryman = "INSERT INTO deliveryman (email, name, contact_no) 
+                                         VALUES ('$email', '$user_name', '$contact_no')";
+                            $result2 = mysqli_query($Conn, $sql_deliveryman);
+
+                            if ($result && $result2) {
+
+                                header("Location: ../userProfiles/delivery/deliverymanProfile/index.php");
+                                unset($email);
+                                unset($password);
+                                unset($cpassword);
+                                unset($user_name);
+                                unset($contact_no);
+                                $_POST['contact_no'] = "";
+                                $_POST['email'] = "";
+                                $_POST['password'] = "";
+                                $_POST['cpassword'] = "";
+                                $_POST['user_name'] = "";
+                            } else {
+                                echo "something went wrong";
+                                unset($email);
+                                unset($password);
+                                unset($cpassword);
+                                unset($user_name);
+                                unset($contact_no);
+                                $_POST['contact_no'] = "";
+                                $_POST['email'] = "";
+                                $_POST['password'] = "";
+                                $_POST['cpassword'] = "";
+                                $_POST['user_name'] = "";
+                            }
                         }
                     }
+                } else {
+                    $ConfirmErr = "Password doesn't match";
 
-                
-            
+                    unset($email);
+                    unset($password);
+                    unset($cpassword);
+                    unset($user_name);
+                    unset($contact_no);
+                    $_POST['contact_no'] = "";
+                    $_POST['email'] = "";
+                    $_POST['password'] = "";
+                    $_POST['cpassword'] = "";
+                    $_POST['user_name'] = "";
+                }
+            } else {
+                $PassErr = "Password should contain at least one uppercase letter, one lowercase letter, one special character and one number";
+                unset($email);
+                unset($password);
+                unset($cpassword);
+                unset($user_name);
+                unset($contact_no);
+                $_POST['contact_no'] = "";
+                $_POST['email'] = "";
+                $_POST['password'] = "";
+                $_POST['cpassword'] = "";
+                $_POST['user_name'] = "";
+            }
+        } else {
+            $contactErr = "Contact no must be 11 digits long";
+
+            unset($email);
+            unset($password);
+            unset($cpassword);
+            unset($user_name);
+            unset($contact_no);
+            $_POST['contact_no'] = "";
+            $_POST['email'] = "";
+            $_POST['password'] = "";
+            $_POST['cpassword'] = "";
+            $_POST['user_name'] = "";
+        }
+    } else {
+        $emailErr = "Invalid Email";
+        echo "<script>alert('Selected deliveries deleted successfully.');</script>";
+
+        unset($email);
+        unset($password);
+        unset($cpassword);
+        unset($user_name);
+        unset($contact_no);
+        $_POST['contact_no'] = "";
+        $_POST['email'] = "";
+        $_POST['password'] = "";
+        $_POST['cpassword'] = "";
+        $_POST['user_name'] = "";
+    }
+}
+
+
+
 
 
 
@@ -245,9 +210,9 @@ if (isset($_POST['submit']))
     <link href="style.css" rel="stylesheet" />
 
     <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,9 +230,9 @@ if (isset($_POST['submit']))
 
 <body>
     <?php
-  require 'navbar.php';
-  Navbar();
-  ?>
+    require 'navbar.php';
+    Navbar();
+    ?>
 
 
     <div class="container1">
@@ -280,84 +245,78 @@ if (isset($_POST['submit']))
                     <input type="radio" name="Field" value="Reader" required /> Reader
                     <input type="radio" name="Field" value="DeliveryMan" required /> Delivery Man<br>
                 </h6>
-
-                <!-- Email -->
-                <div class="form__input-group">
-                    <!-- <div class="tooltip"> -->
-                    <input type="email" class="form__input" name="email" autofocus placeholder="email ID"
-                        autocomplete="off" value="<?php echo $email; ?>" required>
-                    <!-- <span class="tooltiptext">Tooltip text</span>
-                </div> -->
-                    <span class="error"> <?php echo $emailErr;?></span>
-                    <div class="form__input-error-message"></div>
-                    <div class="form__input-error-message"></div>
-                </div>
-                <div class="form__input-group">
-                    <!-- <div class="tooltip"> -->
-                    <input type="text" class="form__input" name="contact_no" autofocus placeholder="contact no"
-                        autocomplete="off" value="<?php echo $contact_no; ?>" required>
-                    <!-- <span class="tooltiptext">Tooltip text</span>
-                </div> -->
-                    <span class="error"> <?php echo $contactErr;?></span>
-                    <div class="form__input-error-message"></div>
-                    <div class="form__input-error-message"></div>
-                </div>
                 <!-- user_name -->
                 <div class="form__input-group">
                     <!-- <div class="tooltip"> -->
-                    <input type="text" class="form__input" name="user_name" autofocus placeholder="user name"
-                        autocomplete="off" value="<?php echo $user_name; ?>" required>
+                    <input type="text" class="form__input" name="user_name" autofocus placeholder="user name" autocomplete="off" value="<?php echo $user_name; ?>" required>
                     <!-- <span class="tooltiptext">Tooltip text</span>
                 </div> -->
                     <!-- <span class="error"> php echo $user_error;?></span> -->
                     <div class="form__input-error-message"></div>
                     <div class="form__input-error-message"></div>
                 </div>
+
+                <div class="form__input-group">
+                    <!-- <div class="tooltip"> -->
+                    <input type="text" class="form__input" name="contact_no" autofocus placeholder="contact no" autocomplete="off" value="<?php echo $contact_no; ?>" required>
+                    <!-- <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+                    <span class="error"> <?php echo $contactErr; ?></span>
+                    <div class="form__input-error-message"></div>
+                    <div class="form__input-error-message"></div>
+                </div>
+                <!-- Email -->
+                <div class="form__input-group">
+                    <!-- <div class="tooltip"> -->
+                    <input type="email" class="form__input" name="email" autofocus placeholder="email ID" autocomplete="off" value="<?php echo $email; ?>" required>
+                    <!-- <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+                    <span class="error"> <?php echo $emailErr; ?></span>
+                    <div class="form__input-error-message"></div>
+                    <div class="form__input-error-message"></div>
+                </div>
                 <!-- Password -->
                 <!-- <div class="tooltip"> -->
                 <div class="form__input-group">
-                    <input type="password" class="form__input" name="password" id="myInput" autofocus
-                        placeholder="Password" autocomplete="off" value="<?php echo $_POST['password']; ?>" required>
+                    <input type="password" class="form__input" name="password" id="myInput" autofocus placeholder="Password" autocomplete="off" value="<?php echo $_POST['password']; ?>" required>
                     <input type="checkbox" onclick="myFunction()"><span class="error2">Show Password</span><br>
                     <!-- <span class="tooltiptext">Password should contain one uppercase letter,lowercase
                             letter, special character and number</span> -->
                     <!-- </div> -->
                 </div>
-                <span class="error"> <?php echo $PassErr;?></span>
+                <span class="error"> <?php echo $PassErr; ?></span>
                 <div class="form__input-error-message"></div>
                 <div class="form__input-error-message"></div>
                 <!-- Confirm Password -->
                 <div class="form__input-group">
                     <!-- <div class="tooltip"> -->
-                    <input type="password" class="form__input" name="cpassword" id="myInput2" autofocus
-                        placeholder="Confirm Password" autocomplete="off" value="<?php echo $_POST['cpassword']; ?>"
-                        required>
+                    <input type="password" class="form__input" name="cpassword" id="myInput2" autofocus placeholder="Confirm Password" autocomplete="off" value="<?php echo $_POST['cpassword']; ?>" required>
                     <input type="checkbox" onclick="myFunction2()"><span class="error2">Show Password</span><br>
                     <!-- <span class="tooltiptext">Tooltip text</span>
                 </div> -->
                 </div>
-                <span class="error"> <?php echo $ConfirmErr;?></span>
+                <span class="error"> <?php echo $ConfirmErr; ?></span>
                 <div class="form__input-error-message"></div>
                 <div class="form__input-error-message"></div>
 
                 <script>
-                function myFunction() {
-                    var x = document.getElementById("myInput");
-                    if (x.type === "password") {
-                        x.type = "text";
-                    } else {
-                        x.type = "password";
+                    function myFunction() {
+                        var x = document.getElementById("myInput");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
                     }
-                }
 
-                function myFunction2() {
-                    var x = document.getElementById("myInput2");
-                    if (x.type === "password") {
-                        x.type = "text";
-                    } else {
-                        x.type = "password";
+                    function myFunction2() {
+                        var x = document.getElementById("myInput2");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
                     }
-                }
                 </script>
                 <!-- Submit -->
                 <input type="submit" name="submit" class="form__button" value="Continue" />

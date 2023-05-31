@@ -72,9 +72,9 @@ if (isset($_POST['submit'])) {
             $locationId = $row['location_id'];
             $sql= "update customer set fine_amount= fine_amount+100, effective_date=NOW() where email in (select email from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW())";
             $result = mysqli_query($Conn, $sql);
-            $sql="update customer_book set return_date= DATE_ADD(NOW(), INTERVAL 3 MINUTE) where email in (select email from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW()) and return_date in (select retrieval_date from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW())";
+            $sql="update customer_book set return_date= DATE_ADD(NOW(), INTERVAL 2 MINUTE) where email in (select email from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW()) and return_date in (select retrieval_date from book_location_retrieval where location_id='$locationId' and retrieval_date<NOW())";
             $result = mysqli_query($Conn, $sql);
-            $sql= "update book_location_retrieval set retrieval_date= DATE_ADD(NOW(), INTERVAL 3 MINUTE) where location_id='$locationId' and retrieval_date<NOW()";
+            $sql= "update book_location_retrieval set retrieval_date= DATE_ADD(NOW(), INTERVAL 2 MINUTE) where location_id='$locationId' and retrieval_date<NOW()";
             $result = mysqli_query($Conn, $sql);
             header("Location: index.php");
 }
