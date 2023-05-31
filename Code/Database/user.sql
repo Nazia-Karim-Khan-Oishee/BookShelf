@@ -1247,10 +1247,6 @@ CREATE TABLE `book_location_delivery` (
 -- Dumping data for table `book_location_delivery`
 --
 
-INSERT INTO `book_location_delivery` (`delivery_id`, `email`, `ISBN`, `copy_id`, `location_id`, `delivery_date`) VALUES
-('6475b565b4afb', 'dummmy@gmail.com', '1100122', 17, '29', '2023-06-02 00:00:00'),
-('6476125bd67b4', 'oishee@gmail.com', '9780143029267', 82, '29', '2023-06-02 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -1269,10 +1265,6 @@ CREATE TABLE `book_location_retrieval` (
 --
 -- Dumping data for table `book_location_retrieval`
 --
-
-INSERT INTO `book_location_retrieval` (`retrieval_id`, `email`, `ISBN`, `copy_id`, `location_id`, `retrieval_date`) VALUES
-('6475b565b4afb', 'dummmy@gmail.com', '1100122', 17, '29', '2023-06-06 00:00:00'),
-('6476125bd67b4', 'oishee@gmail.com', '9780143029267', 82, '29', '2023-06-06 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1294,11 +1286,6 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`email`, `name`, `contact_no`, `fine_amount`, `effective_date`, `status`, `picture`) VALUES
-('admin@gmail.com', 'admin', '01321178922', '0', '0000-00-00 00:00:00', 0, NULL),
-('dummmy@gmail.com', 'dummy', '09126378291', '0', '0000-00-00 00:00:00', 0, 'hooman.jpg'),
-('oishee@gmail.com', 'naziaaaa', '01321178965', '0', '0000-00-00 00:00:00', 0, 'hooman.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -1317,9 +1304,6 @@ CREATE TABLE `customer_book` (
 -- Dumping data for table `customer_book`
 --
 
-INSERT INTO `customer_book` (`email`, `ISBN`, `copy_id`, `return_date`, `issue_date`) VALUES
-('dummmy@gmail.com', '1100122', 17, '2023-06-06 00:00:00', '2023-06-02 00:00:00'),
-('oishee@gmail.com', '9780143029267', 82, '2023-06-06 00:00:00', '2023-06-02 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1339,8 +1323,6 @@ CREATE TABLE `deliveryman` (
 -- Dumping data for table `deliveryman`
 --
 
-INSERT INTO `deliveryman` (`email`, `name`, `contact_no`, `area`, `district`, `division`, `location_id`, `picture`) VALUES
-('nazia@gmail.com', 'nazia', '1234567891', '29', 'delivery.jpg');
 
 -- --------------------------------------------------------
 
@@ -1535,10 +1517,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`email`, `password`, `role`) VALUES
-('admin@gmail.com', '$2y$10$hprp9RwCgnz9rx9z94m5sOotsYARyVJn4MpKujCVfDIKnP37NPNGm', 'admin'),
-('dummmy@gmail.com', '$2y$10$a2m2aIll0aHe6x3djD.4ROrNsJwQU02wAUlwc.eF8VhhtE7FygSRO', 'Reader'),
-('nazia@gmail.com', '$2y$10$WomKs7..bD3ZEm4vuoqwS.rclb6pMjkjrmSFYuBYEynLxWf/w/6sy', 'DeliveryMan'),
-('oishee@gmail.com', '$2y$10$jUbg.BuDsAihQNo9knf29O6WWD3A7uWswpmp.9oCq6U.w/JJ4/.N.', 'Reader');
+('admin@gmail.com', '$2y$10$hprp9RwCgnz9rx9z94m5sOotsYARyVJn4MpKujCVfDIKnP37NPNGm', 'admin');
 
 --
 -- Indexes for dumped tables
