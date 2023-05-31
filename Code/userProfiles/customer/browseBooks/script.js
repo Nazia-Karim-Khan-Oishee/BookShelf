@@ -4,3 +4,4 @@ document.addEventListener("DOMContentLoaded", function () {
         books[i].classList.add("fade-in");
     }
 });
+

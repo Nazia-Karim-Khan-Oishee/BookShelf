@@ -1,21 +1,36 @@
 <?php 
 include '../../../Database/Config.php';
 session_start(); 
-if (!isset($_SESSION['email'])) {
-    // User is not logged in, redirect to the login page
-    header('Location: ../../../LoginAuth/login.php');
-    exit;
+
+// Check if the search query is set
+if(isset($_GET['search_query'])) {
+    $searchQuery = $_GET['search_query'];
+    
+    // Query to fetch book ID, name, author, and image from the book table based on the search query
+    $sql = "SELECT * FROM book WHERE author LIKE CONCAT('%', ?, '%') OR name LIKE CONCAT('%', ?, '%')";
+    
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($Conn, $sql);
+    
+    // Bind the search query as a parameter
+    mysqli_stmt_bind_param($stmt, "ss", $searchQuery, $searchQuery);
+    
+    // Execute the prepared statement
+    mysqli_stmt_execute($stmt);
+    
+    // Get the result set
+    $result = mysqli_stmt_get_result($stmt);
+} else {
+    // Query to fetch book ID, name, author, and image from the book table
+    $sql = "SELECT * FROM book";
+    
+    // Execute the query
+    $result = mysqli_query($Conn, $sql);
 }
-
-// Query to fetch book ID, name, author, and image from the book table
-$sql = "SELECT * FROM book";
-
-// Execute the query
-$result = mysqli_query($Conn, $sql);
 ?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Browse Books</title>
     <link href="../../../boxicons-2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -37,7 +52,6 @@ $result = mysqli_query($Conn, $sql);
     }
     </style>
 </head>
-
 <body>
     <?php
     require 'navbar.php';
@@ -48,11 +62,26 @@ $result = mysqli_query($Conn, $sql);
             <div class="row justify-content-center text-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="header">
-
                         <h2>Available Books</h2>
                     </div>
                 </div>
             </div>
+            
+            <!-- Add the search form at the top of the page -->
+            <div class="row justify-content-center text-center mt-3 mb-5">
+                <div class="col-md-8 col-lg-6">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+                        <div class="input-group">
+                            <button class="btn btn-primary mx-2" type="submit">Show All</button>
+                            <input type="text" class="form-control" name="search_query" placeholder="Search by author or book name" />
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary mx-2" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             <div class="row">
                 <!-- Single Product -->
                 <?php
@@ -62,13 +91,9 @@ $result = mysqli_query($Conn, $sql);
                 ?>
                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                     <div id="product-1" class="single-product fade-in-book">
-                        <div class="part-1"
-                            style="background-image: url('../../../../images/<?php echo $row['image']; ?>');">
+                        <div class="part-1" style="background-image: url('../../../../images/<?php echo $row['image']; ?>');">
                             <ul>
-                                <li><a href="../Book/index.php?ISBN=<?php echo $row['ISBN'] ?>"><i
-                                            class='bx bx-cart-add bx-md' style="background-color: transparent;"></i></a>
-                                </li>
-
+                                <li><a href="../Book/index.php?ISBN=<?php echo $row['ISBN'] ?>"><i class='bx bx-cart-add bx-md' style="background-color: transparent;"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -90,5 +115,4 @@ $result = mysqli_query($Conn, $sql);
         </div>
     </section>
 </body>
-
 </html>

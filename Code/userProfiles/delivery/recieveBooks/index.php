@@ -20,7 +20,7 @@ if($result)
 }
 
 $sql2 = "SELECT DISTINCT book_location_retrieval.retrieval_id as DeliveryID,book_location_retrieval.copy_id as CopyId,customer.fine_amount as FineAmount, customer.name as CustomerName,customer.contact_no as ContactNo,customer.email as email,book.name as BookName,book.ISBN as ISBN,location.area as Area 
-FROM book_location_retrieval,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_retrieval.location_id='$locationId' and deliveryman.location_id='$locationId'
+FROM book_location_retrieval,location,customer,deliveryman,book where location.location_id='$locationId' and book_location_retrieval.location_id='$locationId' and deliveryman.location_id='$locationId' and book_location_retrieval.retrieval_id not in (select delivery_id from book_location_delivery)
  and book_location_retrieval.ISBN=book.ISBN and book_location_retrieval.email=customer.email and book_location_retrieval.retrieval_date<NOW()
 ";
 
