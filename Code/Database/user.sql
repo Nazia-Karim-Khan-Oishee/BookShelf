@@ -1331,9 +1331,6 @@ CREATE TABLE `deliveryman` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `district` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `division` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location_id` decimal(10,0) DEFAULT NULL,
   `picture` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1343,7 +1340,7 @@ CREATE TABLE `deliveryman` (
 --
 
 INSERT INTO `deliveryman` (`email`, `name`, `contact_no`, `area`, `district`, `division`, `location_id`, `picture`) VALUES
-('nazia@gmail.com', 'nazia', '1234567891', 'Mohammadpur', 'Dhaka', 'Dhaka', '29', 'delivery.jpg');
+('nazia@gmail.com', 'nazia', '1234567891', '29', 'delivery.jpg');
 
 -- --------------------------------------------------------
 

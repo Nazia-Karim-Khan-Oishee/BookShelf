@@ -10,7 +10,7 @@ if ($_SESSION['email']) {
 }
 
 
-$sql = "SELECT * FROM deliveryman WHERE email='$curr_email'";
+$sql = "SELECT * FROM deliveryman,location WHERE email='$curr_email' and location.location_id=deliveryman.location_id";
 $result = mysqli_query($Conn, $sql);
 $row = mysqli_fetch_assoc($result);
 

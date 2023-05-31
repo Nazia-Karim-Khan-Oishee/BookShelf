@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     mysqli_query($Conn, $updateSql);
 }
 // Fetch all deliverymen from the database
-$sql = "SELECT * FROM deliveryman";
+$sql = "SELECT * FROM deliveryman, location WHERE deliveryman.location_id=location.LOCATION_ID";
 $result = mysqli_query($Conn, $sql);
 ?>
 
