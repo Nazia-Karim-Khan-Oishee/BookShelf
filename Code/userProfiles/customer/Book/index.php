@@ -28,7 +28,7 @@ if (isset($_GET['ISBN'])) {
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count = $row['count'];
-        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > NOW()";
+        $sql = "SELECT count(*) as count from customer_book where email = '$email' and return_date > NOW() or '$email' in(select email from book_location_retrieval )";
         $res = mysqli_query($Conn, $sql);
         $row = mysqli_fetch_assoc($res);
         $count2 = $row["count"];
