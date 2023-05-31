@@ -1278,7 +1278,6 @@ CREATE TABLE `customer` (
   `contact_no` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fine_amount` decimal(4,0) NOT NULL,
   `effective_date` datetime NOT NULL,
-  `status` tinyint(1) DEFAULT 0,
   `picture` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
