@@ -9,10 +9,31 @@ if ($_SESSION['email']) {
     $curr_email = $_SESSION['email'];
 }
 
+// $sqlo = "SELECT * FROM deliveryman where email='$curr_email'";
+// $resulto = mysqli_query($Conn, $sql);
+// $rowo = mysqli_fetch_assoc($result);
+// if(!$rowo[location_id])
+// {
 
-$sql = "SELECT * FROM deliveryman,location WHERE email='$curr_email' and location.location_id=deliveryman.location_id";
+// }
+$area="Not assigned";
+$district="Not assigned";
+$division="Not assigned";
+
+$sql = "SELECT * FROM deliveryman WHERE email='$curr_email'";
+// and location.location_id=deliveryman.location_id";
 $result = mysqli_query($Conn, $sql);
 $row = mysqli_fetch_assoc($result);
+if($row[location_id])
+{
+    // and location.location_id=deliveryman.location_id";
+$sqlo = "SELECT * FROM location.location_id=deliveryman.location_id";
+$resulto = mysqli_query($Conn, $sqlo);
+$rowo = mysqli_fetch_assoc($resulto);
+$area=$rowo['area'];
+$district=$rowo['district'];
+$division=$rowo['division'];
+}
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -25,7 +46,7 @@ if (isset($_POST['submit'])) {
             $message = $_SESSION['flash_message'];
             unset($_SESSION['flash_message']);
         }
-    
+        
     } else {
         $_SESSION['flash_message'] = "ERROR: Could not update profile.";
         if (isset($_SESSION['flash_message'])) {
@@ -43,6 +64,7 @@ $image_Path = "../../../../images/".basename($Get_image_name);
 $sql = "Update deliveryman set picture='$Get_image_name' where email='$curr_email'";
 // $upload=mysqli_query($Conn, $sql);
 if(mysqli_query($Conn, $sql) ){
+    echo "<script>alert('hello')</script>";
 move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
 
   $_SESSION['flash_message']="profile picture uploaded successfully.";
@@ -141,21 +163,21 @@ header("Location: index.php");
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Area</label>
                                         <input type="text" class="form-control" id="area" name="area"
-                                            value="<?php echo $row['area']; ?>" disabled>
+                                            value="<?php echo $area; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">District</label>
                                         <input type="text" class="form-control" id="district" name="district"
-                                            value="<?php echo $row['district']; ?>" disabled>
+                                            value="<?php echo $district; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Division</label>
                                         <input type="text" class="form-control" id="division" name="division"
-                                            value="<?php echo $row['division']; ?>" disabled>
+                                            value="<?php echo $division; ?>" disabled>
                                     </div>
                                 </div>
 
